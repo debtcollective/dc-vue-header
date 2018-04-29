@@ -1,7 +1,7 @@
 <template>
-  <div class="table -fh">
-    <div class="table-cell align-middle Dropdown">
-      <button :class="`Dropdown__head ${active ? 'active' : ''}`" type="button" @click="() => active = !active">More 
+  <div>
+    <div class="align-middle Dropdown">
+      <button :class="`Dropdown__head nav-item-wrapper ${active ? 'active' : ''}`" type="button" @click="toggleActive">More 
         <svg width="16" height="11" viewBox="0 0 16 11" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
           <g id="Canvas" fill="none">
             <g id="Vector 2.5">
@@ -36,8 +36,19 @@ export default {
     };
   },
   methods: {
-    handleDropdownClick() {
+    toggleActive() {
+      if (!this.active) {
+        document.addEventListener("click", this.handleOffMenuClick);
+      } else {
+        document.removeEventListener("click", this.handleOffMenuClick);
+      }
+
       this.active = !this.active;
+    },
+    handleOffMenuClick({ target: { classList } }) {
+      // Any click on a menu item should close the menu, so we only care about
+      // preventing duplicated toggles which the menu head is clicked
+      if (!classList.contains("Dropdown__head")) this.toggleActive();
     }
   }
 };
@@ -45,87 +56,82 @@ export default {
 
 <style scoped lang="scss">
 @import "./variables";
+@import "./shared";
 
 .Dropdown {
   position: relative;
-}
 
-.Dropdown__head {
-  background: none;
-  border: none;
-  color: inherit;
-  font-family: inherit;
-  font-size: inherit;
-  font-weight: 600;
-  padding: 6px 18px;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
+  &__head {
+    background: none;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: 600;
+    padding: 6px 18px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    border: none;
 
-.Dropdown__head:hover,
-.Dropdown__head.active {
-  border: 1px solid $text-3;
-  padding-left: 17px;
-  padding-right: 17px;
-  color: $text-0 !important;
-}
-
-.Dropdown__body {
-  z-index: 1;
-  position: absolute;
-  min-width: 150%;
-  white-space: nowrap;
-  padding: 0;
-  right: 0;
-  list-style: none;
-  background-color: $k-bg-tan;
-  border-radius: 5px;
-  border: 1px solid $text-3;
-
-  &[aria-hidden="false"] {
-    opacity: 1;
-    transform: translate3d(0, 10px, 0);
-    transition: opacity 100ms linear, transform 100ms ease-in;
-  }
-
-  &[aria-hidden="true"] {
-    opacity: 0;
-    transform: translate3d(0, 0, 0);
-    transition: visibility 0ms linear 100ms opacity 100ms linear,
-      transform 100ms ease-in;
-  }
-
-  a {
-    padding: 1rem 1rem;
-    width: 100%;
-
-    /* Ensures the background color on hover does
-       not extend outside the radius of the parent li */
-    border-top-left-radius: inherit;
-    border-top-right-radius: inherit;
-    border-bottom-left-radius: inherit;
-    border-bottom-right-radius: inherit;
+    &.active {
+      padding: 9px 17px;
+      border: 1px solid $text-3;
+      color: $text-0 !important;
+    }
 
     &:hover {
-      background-color: rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      padding: 6px 17px;
     }
   }
 
-  li {
-    padding: 1rem 0;
+  &__body {
+    z-index: 1;
+    position: absolute;
+    width: 20em;
+    white-space: nowrap;
+    padding: 0;
+    right: 0;
+    top: 44px;
+    list-style: none;
+    background-color: $k-bg-tan;
+    border-radius: 8px;
+    border: 1px solid $text-3;
 
-    &:not(:first-child) {
-      border-top: 1px solid $text-4;
+    &[aria-hidden="true"] {
+      display: none;
     }
 
-    &:first-child {
-      border-top-left-radius: 5px;
-      border-top-right-radius: 5px;
+    a {
+      display: inline-block;
+      padding: 1rem 1rem;
+      width: 100%;
+
+      /* Ensures the background color on hover does
+       not extend outside the radius of the parent li */
+      border-top-left-radius: inherit;
+      border-top-right-radius: inherit;
+      border-bottom-left-radius: inherit;
+      border-bottom-right-radius: inherit;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+      }
     }
 
-    &:last-child {
-      border-bottom-left-radius: 5px;
-      border-bottom-right-radius: 5px;
+    li {
+      &:not(:first-child) {
+        border-top: 1px solid $text-4;
+      }
+
+      &:first-child {
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+      }
+
+      &:last-child {
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+      }
     }
   }
 }

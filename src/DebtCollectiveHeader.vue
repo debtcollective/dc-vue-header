@@ -8,25 +8,34 @@
         </a>
       </h1>
 
-      <div class="-fh" style="float: right;">
-        <ul class="-fh list-reset">
-          <li v-for="link in headerLinks" class="inline-block align-top -fh" :key="link.href">
-            <div class="table -fh">
+      <div class="mt16" style="float: right;">
+        <ul class="list-reset">
+          <li v-for="link in headerLinks" class="inline-block align-top" :key="link.href">
+            <div class="">
               <a
-                :class="`Header__link table-cell align-middle -fh ${currentPath === link.href ? 'active' : ''}`"
+                :class="`Header__link align-middle ${currentPath === link.href ? 'active' : ''}`"
                 :href="link.href"
                 :title="link.title"
                 :onclick="link.onclick"
                 >
-                <p class="nav-item-wrapper">{{link.text}}</p>
+                <p class="nav-item-wrapper">
+                  {{link.text}}
+                </p>
+                <div class="active-underline" />
               </a>
             </div>  
           </li>
-          <li class="inline-block align-top -fh">
+          <li class="inline-block align-top">
             <debt-collective-header-dropdown
               :links="dropdownLinks"
               style="margin-right: 1em"
             />
+          </li>
+          <li class="inline-block align-top">
+            <profile-dropdown :user="user" v-if="user !== null"/>
+            <a v-else class="Header__link align-middle">
+              <p class="nav-item-wrapper">Login or Sign Up</p>
+            </a>
           </li>
         </ul>
       </div>
@@ -40,9 +49,11 @@
 
 <script>
 import DebtCollectiveHeaderDropdown from "./Dropdown.vue";
+import ProfileDropdown from "./ProfileDropdown.vue";
+import { getCurrentUser } from "./services/ProfileService";
 
 export default {
-  components: { DebtCollectiveHeaderDropdown },
+  components: { DebtCollectiveHeaderDropdown, ProfileDropdown },
   name: "DebtCollectiveHeader",
   props: {
     logoUrl: {
@@ -64,18 +75,36 @@ export default {
     },
     avatarUrl: {
       type: String
+    },
+    discourseEndpoint: {
+      type: String,
+      required: true
     }
   },
   data() {
     return {
-      currentPath: window.location.pathname
+      currentPath: window.location.pathname,
+      user: null
     };
+  },
+  created() {
+    window["@@discourse-endpoint"] = this.discourseEndpoint;
+    getCurrentUser()
+      .then(u => (this.user = u))
+      .catch(err => {
+        if (err.error_type === "not_logged_in") {
+          this.user = null;
+        } else {
+          console.error(err);
+        }
+      });
   }
 };
 </script>
 
 <style scoped lang="scss">
 @import "./variables";
+@import "./shared";
 
 .Header {
   z-index: 2;
@@ -90,78 +119,53 @@ export default {
   font-family: "Libre Franklin", "Helvetica Neue", Arial, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   margin: 0;
-}
 
-.Header a,
-.Header a:hover {
-  text-decoration: none;
-}
+  .Dropdown__label {
+    max-width: 150px;
+  }
 
-.Header .Dropdown__label {
-  max-width: 150px;
-}
+  &__height {
+    height: 72px;
+  }
 
-.Header__height {
-  height: 72px;
-}
+  &__logo-img {
+    display: block;
+    height: 54px;
+    margin: 9px 9px;
+  }
 
-.Header__logo-img {
-  display: block;
-  height: 54px;
-  margin: 9px 9px;
-}
+  &__link {
+    color: $text-0;
+    font-weight: 600;
+    height: 100%;
 
-.Header__link {
-  color: $text-0;
-  font-weight: 600;
-  height: 100%;
-}
+    &.active {
+      position: relative;
 
-.Header__link.active {
-  position: relative;
-}
+      .nav-item-wrapper {
+        height: 36px;
+      }
 
-.Header__link.active::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  height: 0;
-  border: 2px solid $dc-red;
-  border-radius: 5px;
-  width: 86%;
-  background-color: $dc-red;
-  transform: translateY(-16px) translateX(10px);
-}
+      .active-underline {
+        border: 2px solid $dc-red;
+        border-radius: 5px;
+        background-color: $dc-red;
+        margin: 0 5%;
+      }
+    }
+  }
 
-.Header__dropdown-item {
-  display: block;
-  width: 100%;
-  padding: 0.25em 1.75em;
-  border: none;
-  font: inherit;
-  font-weight: 500;
-  text-align: left;
-  color: $text-0;
-  cursor: pointer;
-  transition: color 260ms;
-}
-
-.nav-item-wrapper {
-  padding: 6px 18px;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-
-.nav-item-wrapper:hover {
-  border: 1px solid $text-3;
-  padding-left: 17px;
-  padding-right: 17px;
-  color: $text-0 !important;
-}
-
-.active .nav-item-wrapper:hover {
-  border: none;
-  padding: 6px 18px;
+  &__dropdown-item {
+    display: block;
+    width: 100%;
+    padding: 0.25em 1.75em;
+    border: none;
+    font: inherit;
+    font-weight: 500;
+    text-align: left;
+    color: $text-0;
+    cursor: pointer;
+    transition: color 260ms;
+  }
 }
 </style>
