@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "rollup -c",
+    "build": "rollup -c && cp index.js public/index.js && cp bundle.css public/bundle.css",
     "lint": "vue-cli-service lint"
   },
   "license": "MIT",
@@ -38,5 +38,9 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 10"
-  ]
+  ],
+  "dependencies": {
+    "postcss-css-variables": "^0.8.1",
+    "postcss-nested": "^3.0.0"
+  }
 }

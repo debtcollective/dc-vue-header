@@ -1,41 +1,42 @@
-import resolve from 'rollup-plugin-node-resolve';
-import commonjs from 'rollup-plugin-commonjs';
-import babel from 'rollup-plugin-babel';
-import vue from 'rollup-plugin-vue';
-import uglify from 'rollup-plugin-uglify';
-import postcss from 'rollup-plugin-postcss';
-import autoprefixer from 'autoprefixer';
-import csso from 'postcss-csso';
-import pkg from './package.json';
+import resolve from "rollup-plugin-node-resolve";
+import commonjs from "rollup-plugin-commonjs";
+import babel from "rollup-plugin-babel";
+import vue from "rollup-plugin-vue";
+import uglify from "rollup-plugin-uglify";
+import postcss from "rollup-plugin-postcss";
+import autoprefixer from "autoprefixer";
+import cssvariables from "postcss-css-variables";
+import nested from "postcss-nested";
+import csso from "postcss-csso";
+import pkg from "./package.json";
 
 export default [
   // browser-friendly UMD build
   {
-    input: 'src/index.js',
+    input: "src/index.js",
     output: {
-      name: 'DebtCollectiveHeader',
+      name: "DebtCollectiveHeader",
       file: pkg.main,
-      format: 'umd',
-      exports: 'named',
+      format: "umd",
+      exports: "named"
     },
     plugins: [
       resolve(),
       commonjs(),
       vue({
-        autoStyles: false,
-        styleToImports: true,
+        autoStyles: false
       }),
       postcss({
-        inject: false,
+        inject: true,
         extract: pkg.style,
-        plugins: [autoprefixer(), csso()],
+        plugins: [nested(), autoprefixer(), csso(), cssvariables()]
       }),
       babel({
-        exclude: ['node_modules/**'],
-        runtimeHelpers: true,
+        exclude: ["node_modules/**"],
+        runtimeHelpers: true
       }),
-      uglify(),
-    ],
+      uglify()
+    ]
   },
 
   // CommonJS (for Node) and ES module (for bundlers) build.
@@ -45,23 +46,24 @@ export default [
   // an array for the `output` option, where we can specify
   // `file` and `format` for each target)
   {
-    input: 'src/index.js',
-    external: ['ms'],
-    output: [{ file: pkg.module, format: 'es' }],
+    input: "src/index.js",
+    external: ["ms"],
+    output: [{ file: pkg.module, format: "es" }],
     plugins: [
       resolve(),
       commonjs(),
       postcss({
-        inject: false,
+        inject: true,
         extract: false,
+        plugins: [nested(), autoprefixer(), csso(), cssvariables()]
       }),
       vue({
-        css: false,
+        css: false
       }),
       babel({
-        exclude: ['node_modules/**'],
-        runtimeHelpers: true,
-      }),
-    ],
-  },
+        exclude: ["node_modules/**"],
+        runtimeHelpers: true
+      })
+    ]
+  }
 ];

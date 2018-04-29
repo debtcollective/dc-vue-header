@@ -2,12 +2,41 @@
 <head>
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
   <script src="./index.js"></script>
+  <link rel="stylesheet" type="text/css" href="./bundle.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Libre+Franklin:400,600,800');
+    * {
+      margin: 0;
+    }
+    html {
+      font-size: 16px;
+    }
+  </style>
 </head>
 <body>
-  <div id="debt-collective-header"><debt-collective-header></debt-collective-header></div>
+  <div id="debt-collective-header">
+    <debt-collective-header
+      :header-links="headerLinks"
+      :dropdown-links="dropdownLinks"
+    ></debt-collective-header>
+  </div>
 
   <script>
-    new Vue().$mount('#debt-collective-header')
+    window.loggit = () => console.log('hello, world!');
+
+    new Vue({
+      el: '#debt-collective-header',
+      data: {
+        headerLinks: [
+          { text: 'Dispute Your Debt', href: '/' },
+          { text: 'Donate', href: '#donate', onclick: 'window.loggit()' },
+        ],
+        dropdownLinks: [
+          { text: 'Dispute Your Debt', href: '#dispute-your-debt' },
+          { text: 'Donate', href: '#donate', onclick: 'window.loggit()' },
+        ]
+      }
+    })
   </script>
 </body>
 </html>
