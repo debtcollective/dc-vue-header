@@ -1,4 +1,7 @@
-import { getOptions, discourseEndpoint } from "./service";
+import { getOptions, discourseEndpoint, currentUser } from "./service";
+
+export const getInboxLink = () =>
+  `${discourseEndpoint()}/u/${currentUser().user.username}/messages`;
 
 export const getCurrentUser = () =>
   fetch(
@@ -6,7 +9,9 @@ export const getCurrentUser = () =>
     getOptions()
   ).then(res => {
     const username = res.headers.get("X-Discourse-Username");
-    return fetch(`${discourseEndpoint()}/u/${username}`, getOptions()).then(r =>
-      r.json()
-    );
+    return fetch(`${discourseEndpoint()}/u/${username}`, getOptions())
+      .then(r => r.json())
+      .then(user => {
+        return (window["@@current-user"] = user);
+      });
   });

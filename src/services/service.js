@@ -1,4 +1,5 @@
 export const discourseEndpoint = () => window["@@discourse-endpoint"];
+export const currentUser = () => window["@@current-user"];
 
 export const baseOptions = extendWith =>
   Object.assign(

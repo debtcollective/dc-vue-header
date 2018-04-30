@@ -10,14 +10,7 @@
       </div>
       <ul class="ProfileDropdown__body-content list-reset" v-if="notifications.length">
         <li class="ProfileDropdown__notification" v-for="notification in notifications" :key="notification.id">
-          <profile-notification
-            :title="notification.title"
-            :type="notification.type"
-            :id="notification.id"
-            :unread-count="notification.unreadCount"
-            :notification="notification.data"
-            :read="notification.read"
-          />
+          <profile-notification :notification="notification" />
         </li>
       </ul>
       <div v-else class="ProfileDropdown__body-content">
@@ -38,7 +31,11 @@
 <script>
 import PlaceholderProfilePicture from "./PlaceholderProfilePicture.vue";
 import ProfileNotification from "./ProfileNotification.vue";
-import { getNotifications } from "./services/NotificationService";
+import {
+  getNotifications,
+  isSystem,
+  mapSystemToReadable
+} from "./services/NotificationService";
 import { getCurrentUser } from "./services/ProfileService";
 
 export default {
@@ -53,7 +50,7 @@ export default {
   data() {
     return {
       active: false,
-      notifications: [],
+      rawNotifications: [],
       toggled: false
     };
   },
@@ -61,11 +58,34 @@ export default {
     hasUnread() {
       return (
         !this.toggled &&
-        this.notifications.reduce(
+        this.rawNotifications.reduce(
           (anyUnread, { read }) => anyUnread || !read,
           false
         )
       );
+    },
+    notifications() {
+      const { system, rest } = this.rawNotifications.reduce(
+        ({ system, rest }, n) =>
+          isSystem(n)
+            ? { system: [...system, mapSystemToReadable(n)], rest }
+            : { system, rest: [...rest, n] },
+        { system: [], rest: [] }
+      );
+
+      if (system.length > 3) {
+        return [
+          {
+            aggregatedSystem: {
+              count: system.length
+            },
+            type: "aggregatedSystem"
+          },
+          ...rest
+        ];
+      } else {
+        return [...system, ...rest];
+      }
     }
   },
   methods: {
@@ -97,9 +117,10 @@ export default {
       getNotifications()
         .then(notifications => {
           console.log(notifications);
-          this.notifications = notifications;
+          this.rawNotifications = notifications;
         })
         .catch(({ error_type: errorType }) => {
+          this.rawNotifications = [];
           if (errorType === "not_logged_in") {
             this.loggedIn = false;
           }

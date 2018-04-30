@@ -26,6 +26,21 @@ export const getTopic = id =>
     r.json()
   );
 
+export const isSystem = n => n.data.display_username === "system";
+
+export const mapSystemToReadable = n => ({
+  ...n,
+  data: { ...n.data, display_username: "Dispute Tools" }
+});
+
+export const getTopicForNotification = notification =>
+  getTopic(notification.topic_id);
+
+export const getLinkForNotification = notification =>
+  `${discourseEndpoint()}/t/${notification.topic_id}/${
+    notification.post_number
+  }`;
+
 export const getNotifications = () => {
   return fetch(
     `${discourseEndpoint()}/notifications?recent=true&limit=16`,
@@ -34,6 +49,21 @@ export const getNotifications = () => {
     .then(res => res.json())
     .then(({ notifications /*seen_notification_id*/ }) => {
       console.log(notifications);
+      return notifications.reduce(
+        (ns, n) =>
+          // If it doesn't have a title then it's not a notification type we currently support
+          n.fancy_title
+            ? [
+                ...ns,
+                {
+                  ...n,
+                  type: notificationTypes[n.notification_type - 1]
+                }
+              ]
+            : ns,
+        []
+      );
+      /*
       return Promise.all(
         notifications.reduce((promises, n) => {
           const {
@@ -72,6 +102,7 @@ export const getNotifications = () => {
           }
         }, [])
       );
+      */
     })
     .catch(console.error);
 };
