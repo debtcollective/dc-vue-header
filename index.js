@@ -98,102 +98,6 @@ NAME in FProto || _descriptors && dP$1(FProto, NAME, {
   }
 });
 
-var DebtCollectiveHeaderDropdown = {
-  render: function render() {
-    var _vm = this;
-
-    var _h = _vm.$createElement;
-
-    var _c = _vm._self._c || _h;
-
-    return _c('div', [_c('div', {
-      staticClass: "align-middle Dropdown"
-    }, [_c('button', {
-      class: "Dropdown__head nav-item-wrapper ".concat(_vm.active ? 'active' : ''),
-      attrs: {
-        "type": "button"
-      },
-      on: {
-        "click": _vm.toggleActive
-      }
-    }, [_vm._v("More "), _c('svg', {
-      attrs: {
-        "width": "16",
-        "height": "11",
-        "viewBox": "0 0 16 11",
-        "version": "1.1",
-        "xmlns": "http://www.w3.org/2000/svg",
-        "xmlns:xlink": "http://www.w3.org/1999/xlink"
-      }
-    }, [_c('g', {
-      attrs: {
-        "id": "Canvas",
-        "fill": "none"
-      }
-    }, [_c('g', {
-      attrs: {
-        "id": "Vector 2.5"
-      }
-    }, [_c('path', {
-      attrs: {
-        "d": "M 0 6.35294L 6 0L 12 6.35294",
-        "stroke-width": "3",
-        "transform": "translate(2 8.35303) scale(1 -1)",
-        "stroke": "#2B2B2B"
-      }
-    })])])])]), _vm._v(" "), _c('ul', {
-      staticClass: "Dropdown__body",
-      attrs: {
-        "aria-label": "submenu",
-        "aria-hidden": (!_vm.active).toString()
-      }
-    }, _vm._l(_vm.links, function (link) {
-      return _c('li', {
-        key: link.href
-      }, [_c('a', {
-        staticClass: "Dropdown__item",
-        attrs: {
-          "href": link.href,
-          "role": "button",
-          "onclick": link.onclick,
-          "title": link.title
-        }
-      }, [_vm._v(" " + _vm._s(link.text) + " ")])]);
-    }))])]);
-  },
-  staticRenderFns: [],
-  _scopeId: 'data-v-6149e08a',
-  name: "DebtCollectiveHeaderDropdown",
-  props: {
-    links: {
-      type: Array,
-      required: true
-    }
-  },
-  data: function data() {
-    return {
-      active: false
-    };
-  },
-  methods: {
-    toggleActive: function toggleActive() {
-      if (!this.active) {
-        document.addEventListener("click", this.handleOffMenuClick);
-      } else {
-        document.removeEventListener("click", this.handleOffMenuClick);
-      }
-
-      this.active = !this.active;
-    },
-    handleOffMenuClick: function handleOffMenuClick(_ref) {
-      var classList = _ref.target.classList;
-      // Any click on a menu item should close the menu, so we only care about
-      // preventing duplicated toggles which the menu head is clicked
-      if (!classList.contains("Dropdown__head")) this.toggleActive();
-    }
-  }
-};
-
 function _arrayWithoutHoles(arr) {
   if (Array.isArray(arr)) {
     for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {
@@ -904,6 +808,102 @@ function _toConsumableArray(arr) {
 
 var toConsumableArray = _toConsumableArray;
 
+var DebtCollectiveHeaderDropdown = {
+  render: function render() {
+    var _vm = this;
+
+    var _h = _vm.$createElement;
+
+    var _c = _vm._self._c || _h;
+
+    return _c('div', [_c('div', {
+      staticClass: "align-middle Dropdown"
+    }, [_c('button', {
+      class: "Dropdown__head nav-item-wrapper ".concat(_vm.active ? 'active' : ''),
+      attrs: {
+        "type": "button"
+      },
+      on: {
+        "click": _vm.toggleActive
+      }
+    }, [_vm._v("More "), _c('svg', {
+      attrs: {
+        "width": "16",
+        "height": "11",
+        "viewBox": "0 0 16 11",
+        "version": "1.1",
+        "xmlns": "http://www.w3.org/2000/svg",
+        "xmlns:xlink": "http://www.w3.org/1999/xlink"
+      }
+    }, [_c('g', {
+      attrs: {
+        "id": "Canvas",
+        "fill": "none"
+      }
+    }, [_c('g', {
+      attrs: {
+        "id": "Vector 2.5"
+      }
+    }, [_c('path', {
+      attrs: {
+        "d": "M 0 6.35294L 6 0L 12 6.35294",
+        "stroke-width": "3",
+        "transform": "translate(2 8.35303) scale(1 -1)",
+        "stroke": "#2B2B2B"
+      }
+    })])])])]), _vm._v(" "), _c('ul', {
+      staticClass: "Dropdown__body",
+      attrs: {
+        "aria-label": "submenu",
+        "aria-hidden": (!_vm.active).toString()
+      }
+    }, _vm._l(_vm.links, function (link) {
+      return _c('li', {
+        key: link.href
+      }, [_c('a', {
+        staticClass: "Dropdown__item",
+        attrs: {
+          "href": link.href,
+          "role": "button",
+          "onclick": link.onclick,
+          "title": link.title
+        }
+      }, [_vm._v(" " + _vm._s(link.text) + " ")])]);
+    }))])]);
+  },
+  staticRenderFns: [],
+  _scopeId: 'data-v-6149e08a',
+  name: "DebtCollectiveHeaderDropdown",
+  props: {
+    links: {
+      type: Array,
+      required: true
+    }
+  },
+  data: function data() {
+    return {
+      active: false
+    };
+  },
+  methods: {
+    toggleActive: function toggleActive() {
+      if (!this.active) {
+        document.addEventListener("click", this.handleOffMenuClick);
+      } else {
+        document.removeEventListener("click", this.handleOffMenuClick);
+      }
+
+      this.active = !this.active;
+    },
+    handleOffMenuClick: function handleOffMenuClick(_ref) {
+      var classList = _ref.target.classList;
+      // Any click on a menu item should close the menu, so we only care about
+      // preventing duplicated toggles which the menu head is clicked
+      if (!classList.contains("Dropdown__head")) this.toggleActive();
+    }
+  }
+};
+
 var PlaceholderProfilePicture = {
   render: function render() {
     var _vm = this;
@@ -934,7 +934,7 @@ var PlaceholderProfilePicture = {
       }
     }, [_c('mask', {
       attrs: {
-        "id": "mask0",
+        "id": "mask0_".concat(_vm._uid),
         "mask-type": "alpha",
         "maskUnits": "userSpaceOnUse",
         "x": "0",
@@ -955,11 +955,11 @@ var PlaceholderProfilePicture = {
       }
     })])]), _vm._v(" "), _c('g', {
       attrs: {
-        "mask": "url(#mask0)"
+        "mask": "url(#mask0_".concat(_vm._uid, ")")
       }
     }, [_c('g', {
       attrs: {
-        "id": "profile-pic_2"
+        "id": "profile-pic_2_".concat(_vm._uid)
       }
     }, [_c('circle', {
       attrs: {
@@ -1926,17 +1926,24 @@ var getNotifications = function getNotifications() {
   }).catch(console.error);
 };
 
+var getProfileLink = function getProfileLink() {
+  return "".concat(discourseEndpoint(), "/u/").concat(((currentUser() || {}).user || {}).username);
+};
 var getInboxLink = function getInboxLink() {
-  return "".concat(discourseEndpoint(), "/u/").concat(currentUser().user.username, "/messages");
+  return "".concat(getProfileLink(), "/messages");
 };
 var getCurrentUser = function getCurrentUser() {
   return fetch("".concat(discourseEndpoint(), "/about/live_post_counts.json"), getOptions()).then(function (res) {
-    var username = res.headers.get("X-Discourse-Username");
-    return fetch("".concat(discourseEndpoint(), "/u/").concat(username), getOptions()).then(function (r) {
-      return r.json();
-    }).then(function (user) {
-      return window["@@current-user"] = user;
-    });
+    if (res.status === 403) {
+      throw res;
+    } else {
+      var username = res.headers.get("X-Discourse-Username");
+      return fetch("".concat(discourseEndpoint(), "/u/").concat(username), getOptions()).then(function (r) {
+        return r.json();
+      }).then(function (user) {
+        return window["@@current-user"] = user;
+      });
+    }
   });
 };
 
@@ -2075,7 +2082,7 @@ var ProfileDropdown = {
     return _c('div', {
       staticClass: "ProfileDropdown"
     }, [_c('button', {
-      class: "ProfileDropdown__head",
+      staticClass: "ProfileDropdown__head",
       attrs: {
         "role": "button"
       },
@@ -2108,29 +2115,21 @@ var ProfileDropdown = {
       })], 1);
     })) : _c('div', {
       staticClass: "ProfileDropdown__body-content"
-    }, [_vm._v(" No notifications! ")]), _vm._v(" "), _vm._m(0)])]);
-  },
-  staticRenderFns: [function () {
-    var _vm = this;
-
-    var _h = _vm.$createElement;
-
-    var _c = _vm._self._c || _h;
-
-    return _c('div', {
+    }, [_vm._v(" No notifications! ")]), _vm._v(" "), _c('div', {
       staticClass: "ProfileDropdown__body-footer"
-    }, [_c('button', {
+    }, [_c('a', {
       staticClass: "btn btn-primary profile",
       attrs: {
-        "type": "button"
+        "href": _vm.profileHref
       }
     }, [_vm._v(" View Profile ")]), _vm._v(" "), _c('button', {
       staticClass: "btn btn-secondary log-out",
       attrs: {
         "type": "button"
       }
-    }, [_vm._v(" Log out ")])]);
-  }],
+    }, [_vm._v(" Log out ")])])])]);
+  },
+  staticRenderFns: [],
   _scopeId: 'data-v-e92cd61e',
   components: {
     PlaceholderProfilePicture: PlaceholderProfilePicture,
@@ -2147,7 +2146,8 @@ var ProfileDropdown = {
     return {
       active: false,
       rawNotifications: [],
-      toggled: false
+      toggled: false,
+      profileHref: getProfileLink()
     };
   },
   computed: {
@@ -2189,13 +2189,11 @@ var ProfileDropdown = {
   },
   methods: {
     toggleActive: function toggleActive() {
-      this.toggled = true;
-
-      if (!this.active) {
-        document.addEventListener("click", this.handleOffMenuClick);
-      } else {
-        document.removeEventListener("click", this.handleOffMenuClick);
-      }
+      this.toggled = true; // if (!this.active) {
+      //   document.addEventListener("click", this.handleOffMenuClick);
+      // } else {
+      //   document.removeEventListener("click", this.handleOffMenuClick);
+      // }
 
       this.active = !this.active;
 
@@ -2227,6 +2225,94 @@ var ProfileDropdown = {
   },
   created: function created() {
     this.getNotifications();
+  }
+};
+
+var HamburgerDropdown = {
+  render: function render() {
+    var _vm = this;
+
+    var _h = _vm.$createElement;
+
+    var _c = _vm._self._c || _h;
+
+    return _c('div', {
+      staticClass: "HamburgerDropdown"
+    }, [_c('button', {
+      staticClass: "navbar-toggler",
+      attrs: {
+        "type": "button",
+        "aria-label": "Toggle navigation"
+      },
+      on: {
+        "click": _vm.toggleActive
+      }
+    }, [!_vm.active ? _c('span', {
+      staticClass: "navbar-toggler-icon"
+    }) : _c('svg', {
+      attrs: {
+        "width": "4rem",
+        "height": "2rem",
+        "viewBox": "0 0 24 24",
+        "version": "1.1",
+        "xmlns": "http://www.w3.org/2000/svg",
+        "xmlns:xlink": "http://www.w3.org/1999/xlink"
+      }
+    }, [_c('g', {
+      attrs: {
+        "id": "Canvas",
+        "fill": "none"
+      }
+    }, [_c('g', {
+      attrs: {
+        "id": "Vector"
+      }
+    }, [_c('path', {
+      attrs: {
+        "d": "M 24 2.41714L 21.5829 0L 12 9.58286L 2.41714 0L 0 2.41714L 9.58286 12L 0 21.5829L 2.41714 24L 12 14.4171L 21.5829 24L 24 21.5829L 14.4171 12L 24 2.41714Z",
+        "fill": "#2B2B2B"
+      }
+    })])])])]), _vm._v(" "), _c('ul', {
+      staticClass: "HamburgerDropdown__body",
+      attrs: {
+        "aria-label": "submenu",
+        "aria-hidden": (!_vm.active).toString()
+      }
+    }, _vm._l(_vm.links, function (link) {
+      return _c('li', {
+        key: link.href,
+        on: {
+          "click": _vm.toggleActive
+        }
+      }, [_c('a', {
+        staticClass: "Dropdown__item",
+        attrs: {
+          "href": link.href,
+          "role": "button",
+          "onclick": link.onclick,
+          "title": link.title
+        }
+      }, [_vm._v(" " + _vm._s(link.text) + " ")])]);
+    }))]);
+  },
+  staticRenderFns: [],
+  _scopeId: 'data-v-991790de',
+  name: "HamburgerDropdown",
+  props: {
+    links: {
+      type: Array,
+      required: true
+    }
+  },
+  data: function data() {
+    return {
+      active: false
+    };
+  },
+  methods: {
+    toggleActive: function toggleActive() {
+      this.active = !this.active;
+    }
   }
 };
 
@@ -2290,25 +2376,67 @@ var DebtCollectiveHeader = {
       attrs: {
         "links": _vm.dropdownLinks
       }
-    })], 1), _vm._v(" "), _c('li', {
+    })], 1), _vm._v(" "), _vm.user !== null ? _c('li', {
       staticClass: "inline-block align-top"
-    }, [_vm.user !== null ? _c('profile-dropdown', {
+    }, [_c('profile-dropdown', {
+      attrs: {
+        "user": _vm.user
+      }
+    })], 1) : _c('li', {
+      staticClass: "inline-block align-top mr1"
+    }, [_c('a', {
+      staticClass: "Header__link align-middle",
+      attrs: {
+        "href": "".concat(_vm.discourseEndpoint, "/login")
+      }
+    }, [_c('p', {
+      staticClass: "nav-item-wrapper"
+    }, [_vm._v("Login or Sign Up")])])])], 2)])]), _vm._v(" "), _c('div', {
+      staticClass: "Header__height Header__mobile md-hide lg-hide"
+    }, [_c('hamburger-dropdown', {
+      attrs: {
+        "links": toConsumableArray(_vm.headerLinks).concat(toConsumableArray(_vm.dropdownLinks))
+      }
+    }), _vm._v(" "), _c('h1', {
+      class: "Header__logo ".concat(_vm.user !== null ? '-logged-in' : ''),
+      staticStyle: {
+        "margin": "auto"
+      }
+    }, [_c('a', {
+      attrs: {
+        "href": _vm.logoLink
+      }
+    }, [_c('img', {
+      staticClass: "Header__logo-img",
+      attrs: {
+        "src": _vm.logoUrl
+      }
+    }), _vm._v(" "), _c('div', {
+      staticClass: "sr-only"
+    }, [_vm._v("The Debt Collective Homepage")])])]), _vm._v(" "), _c('div', [_vm.user !== null ? _c('profile-dropdown', {
+      staticStyle: {
+        "float": "right"
+      },
       attrs: {
         "user": _vm.user
       }
     }) : _c('a', {
-      staticClass: "Header__link align-middle"
+      staticClass: "Header__link align-middle",
+      attrs: {
+        "href": "".concat(_vm.discourseEndpoint, "/login")
+      }
     }, [_c('p', {
-      staticClass: "nav-item-wrapper"
-    }, [_vm._v("Login or Sign Up")])])], 1)], 2)])]), _vm._v(" "), _c('div', {
-      staticClass: "Header__height Header__width md-hide lg-hide"
-    }, [_vm._v(" Mobile header ")])]);
+      staticClass: "nav-item-wrapper xs-hide"
+    }, [_vm._v("Login or sign up")]), _vm._v(" "), _c('p', {
+      staticClass: "nav-item-wrapper sm-hide"
+    }, [_vm._v("Login")])])], 1)], 1)]);
   },
   staticRenderFns: [],
   _scopeId: 'data-v-77b31ac7',
   components: {
     DebtCollectiveHeaderDropdown: DebtCollectiveHeaderDropdown,
-    ProfileDropdown: ProfileDropdown
+    ProfileDropdown: ProfileDropdown,
+    HamburgerDropdown: HamburgerDropdown
   },
   name: "DebtCollectiveHeader",
   props: {
@@ -2349,7 +2477,7 @@ var DebtCollectiveHeader = {
     getCurrentUser().then(function (u) {
       return _this.user = u;
     }).catch(function (err) {
-      if (err.error_type === "not_logged_in") {
+      if (err.status === 403 || err.error_type === "not_logged_in") {
         _this.user = null;
       } else {
         console.error(err);
@@ -2385,7 +2513,7 @@ function styleInject(css, ref) {
   }
 }
 
-var css = ".text-0{color: #2b2b2b}.text-1{color: #4f4f4f}.text-2{color: #828282}.text-3{color: #bdbdbd}.text-4{color: #e0e0e0}.text-5{color: #f2f2f2}.sr-only{clip:rect(1px,1px,1px,1px);position:absolute;height:1px;width:1px;overflow:hidden}.list-reset{list-style:none;padding-left:0}.inline-block{display:inline-block}.align-top{vertical-align:top}.table{display:table}.table-cell{display:table-cell}.align-middle{vertical-align:middle}.-fh{height:100%}@media (max-width:40em){.xs-hide{display:none!important}}@media (min-width:40em) and (max-width:52em){.sm-hide{display:none!important}}@media (min-width:52em) and (max-width:64em){.md-hide{display:none!important}}@media (min-width:64em){.lg-hide{display:none!important}}*{-webkit-box-sizing:border-box;box-sizing:border-box}";
+var css = ".text-0{color: #2b2b2b}.text-1{color: #4f4f4f}.text-2{color: #828282}.text-3{color: #bdbdbd}.text-4{color: #e0e0e0}.text-5{color: #f2f2f2}.sr-only{clip:rect(1px,1px,1px,1px);position:absolute;height:1px;width:1px;overflow:hidden}.list-reset{list-style:none;padding-left:0}.inline-block{display:inline-block}.align-top{vertical-align:top}.table{display:table}.table-cell{display:table-cell}.align-middle{vertical-align:middle}.-fh{height:100%}@media (max-width:40em){.xs-hide{display:none!important}}@media (min-width:40em) and (max-width:52em){.sm-hide{display:none!important}}@media (min-width:52em) and (max-width:64em){.md-hide{display:none!important}}@media (min-width:64em){.lg-hide{display:none!important}}*{-webkit-box-sizing:border-box;box-sizing:border-box}.mr1{margin-right:10}";
 styleInject(css);
 
 var _wks$1 = createCommonjsModule(function (module) {

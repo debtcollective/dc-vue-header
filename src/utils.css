@@ -115,3 +115,7 @@
 * {
   box-sizing: border-box;
 }
+
+.mr1 {
+  margin-right: 10;
+}

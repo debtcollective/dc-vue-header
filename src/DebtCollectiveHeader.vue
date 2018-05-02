@@ -31,9 +31,11 @@
               style="margin-right: 1em"
             />
           </li>
-          <li class="inline-block align-top">
-            <profile-dropdown :user="user" v-if="user !== null"/>
-            <a v-else class="Header__link align-middle">
+          <li class="inline-block align-top" v-if="user !== null">
+            <profile-dropdown :user="user" />
+          </li>
+          <li class="inline-block align-top mr1" v-else>
+            <a class="Header__link align-middle" :href="`${discourseEndpoint}/login`">
               <p class="nav-item-wrapper">Login or Sign Up</p>
             </a>
           </li>
@@ -41,8 +43,23 @@
       </div>
     </div>
 
-    <div class="Header__height Header__width md-hide lg-hide">
-      Mobile header
+    <div class="Header__height Header__mobile md-hide lg-hide">
+      <hamburger-dropdown :links="[...headerLinks, ...dropdownLinks]" />
+
+      <h1 :class="`Header__logo ${user !== null ? '-logged-in' : ''}`" style="margin: auto">
+        <a :href="logoLink">
+          <img class="Header__logo-img" :src="logoUrl" />
+          <div class="sr-only">The Debt Collective Homepage</div>
+        </a>
+      </h1>
+
+      <div>
+        <profile-dropdown v-if="user !== null" :user="user" style="float: right" />
+        <a v-else class="Header__link align-middle" :href="`${discourseEndpoint}/login`">
+          <p class="nav-item-wrapper xs-hide">Login or sign up</p>
+          <p class="nav-item-wrapper sm-hide">Login</p>
+        </a>
+      </div>
     </div>
   </div>
 </template>
@@ -50,10 +67,16 @@
 <script>
 import DebtCollectiveHeaderDropdown from "./Dropdown.vue";
 import ProfileDropdown from "./ProfileDropdown.vue";
+import HamburgerDropdown from "./HamburgerDropdown.vue";
 import { getCurrentUser } from "./services/ProfileService";
+import { discourseEndpoint } from "./services/service";
 
 export default {
-  components: { DebtCollectiveHeaderDropdown, ProfileDropdown },
+  components: {
+    DebtCollectiveHeaderDropdown,
+    ProfileDropdown,
+    HamburgerDropdown
+  },
   name: "DebtCollectiveHeader",
   props: {
     logoUrl: {
@@ -92,7 +115,7 @@ export default {
     getCurrentUser()
       .then(u => (this.user = u))
       .catch(err => {
-        if (err.error_type === "not_logged_in") {
+        if (err.status === 403 || err.error_type === "not_logged_in") {
           this.user = null;
         } else {
           console.error(err);
@@ -166,6 +189,26 @@ export default {
     color: $text-0;
     cursor: pointer;
     transition: color 260ms;
+  }
+
+  &__mobile {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    .Header {
+      &__logo {
+        @media (max-width: 40em) {
+          padding-left: 5%;
+        }
+
+        &:not(.-logged-in) {
+          @media (min-width: 40em) and (max-width: 52em) {
+            padding-left: 10%;
+          }
+        }
+      }
+    }
   }
 }
 </style>

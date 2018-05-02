@@ -1,6 +1,6 @@
 <template>
   <div class="ProfileDropdown">
-    <button :class="`ProfileDropdown__head`" role="button" @click="toggleActive">
+    <button class="ProfileDropdown__head" role="button" @click="toggleActive">
       <placeholder-profile-picture :has-unread="hasUnread"/>
       <span class="sr-only">Open/Close Profile Notifications</span>
     </button>
@@ -17,9 +17,9 @@
         No notifications!
       </div>
       <div class="ProfileDropdown__body-footer">
-        <button type="button" class="btn btn-primary profile">
+        <a class="btn btn-primary profile" :href="profileHref">
           View Profile
-        </button>
+        </a>
         <button type="button" class="btn btn-secondary log-out">
           Log out
         </button>
@@ -36,7 +36,7 @@ import {
   isSystem,
   mapSystemToReadable
 } from "./services/NotificationService";
-import { getCurrentUser } from "./services/ProfileService";
+import { getProfileLink } from "./services/ProfileService";
 
 export default {
   components: { PlaceholderProfilePicture, ProfileNotification },
@@ -51,7 +51,8 @@ export default {
     return {
       active: false,
       rawNotifications: [],
-      toggled: false
+      toggled: false,
+      profileHref: getProfileLink()
     };
   },
   computed: {
@@ -92,11 +93,11 @@ export default {
     toggleActive() {
       this.toggled = true;
 
-      if (!this.active) {
-        document.addEventListener("click", this.handleOffMenuClick);
-      } else {
-        document.removeEventListener("click", this.handleOffMenuClick);
-      }
+      // if (!this.active) {
+      //   document.addEventListener("click", this.handleOffMenuClick);
+      // } else {
+      //   document.removeEventListener("click", this.handleOffMenuClick);
+      // }
 
       this.active = !this.active;
 
@@ -136,6 +137,20 @@ export default {
 <style scoped lang="scss">
 @import "./variables";
 @import "./shared";
+
+.Header__mobile {
+  .ProfileDropdown__body {
+    right: 0;
+    width: 100%;
+    border-left: none;
+    border-right: none;
+    border-radius: 0;
+
+    &::before {
+      right: 34px;
+    }
+  }
+}
 
 .ProfileDropdown {
   margin-left: 2em;
@@ -199,7 +214,10 @@ export default {
       padding: 0.5rem 0.25rem;
       border-top: 1px solid $text-0;
 
-      .profile {
+      .profile,
+      .profile:hover {
+        color: $btn-text !important;
+        font-weight: 400;
         width: 60%;
         margin-right: 0;
       }

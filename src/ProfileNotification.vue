@@ -127,6 +127,12 @@ export default {
 @import "./variables";
 @import "./shared";
 
+.Header__mobile {
+  .ProfileNotification {
+    padding: 1rem 0.75rem;
+  }
+}
+
 .ProfileNotification {
   padding: 1rem;
 

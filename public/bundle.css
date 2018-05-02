@@ -183,6 +183,16 @@ fieldset:disabled a.btn[data-v-77b31ac7] {
     color: #2b2b2b;
     cursor: pointer;
     transition: color 260ms; }
+  .Header__mobile[data-v-77b31ac7] {
+    display: flex;
+    align-items: center;
+    justify-content: space-around; }
+    @media (max-width: 40em) {
+      .Header__mobile .Header__logo[data-v-77b31ac7] {
+        padding-left: 5%; } }
+    @media (min-width: 40em) and (max-width: 52em) {
+      .Header__mobile .Header__logo[data-v-77b31ac7]:not(.-logged-in) {
+        padding-left: 10%; } }
 
 .nav-item-wrapper[data-v-6149e08a] {
   padding: 11px 18px;
@@ -520,6 +530,15 @@ fieldset:disabled a.btn[data-v-e92cd61e] {
   line-height: 1.5;
   border-radius: 0.3rem; }
 
+.Header__mobile .ProfileDropdown__body[data-v-e92cd61e] {
+  right: 0;
+  width: 100%;
+  border-left: none;
+  border-right: none;
+  border-radius: 0; }
+  .Header__mobile .ProfileDropdown__body[data-v-e92cd61e]::before {
+    right: 34px; }
+
 .ProfileDropdown[data-v-e92cd61e] {
   margin-left: 2em;
   margin-right: 1em; }
@@ -567,7 +586,10 @@ fieldset:disabled a.btn[data-v-e92cd61e] {
     .ProfileDropdown__body-footer[data-v-e92cd61e] {
       padding: 0.5rem 0.25rem;
       border-top: 1px solid #2b2b2b; }
-      .ProfileDropdown__body-footer .profile[data-v-e92cd61e] {
+      .ProfileDropdown__body-footer .profile[data-v-e92cd61e],
+      .ProfileDropdown__body-footer .profile[data-v-e92cd61e]:hover {
+        color: #fcfbf7 !important;
+        font-weight: 400;
         width: 60%;
         margin-right: 0; }
       .ProfileDropdown__body-footer .log-out[data-v-e92cd61e] {
@@ -723,6 +745,9 @@ fieldset:disabled a.btn[data-v-2aae38cb] {
   line-height: 1.5;
   border-radius: 0.3rem; }
 
+.Header__mobile .ProfileNotification[data-v-2aae38cb] {
+  padding: 1rem 0.75rem; }
+
 .ProfileNotification[data-v-2aae38cb] {
   padding: 1rem; }
   .ProfileNotification__icon[data-v-2aae38cb] {
@@ -754,4 +779,55 @@ fieldset:disabled a.btn[data-v-2aae38cb] {
       overflow: hidden; }
     .ProfileNotification__description.-read[data-v-2aae38cb] {
       color: #828282; }
+
+.HamburgerDropdown[data-v-991790de] {
+  float: left; }
+  .HamburgerDropdown .navbar-toggler[data-v-991790de] {
+    padding: 0 0.75rem;
+    font-size: 1.25rem;
+    line-height: 1;
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-radius: 0.25rem; }
+    .HamburgerDropdown .navbar-toggler[data-v-991790de]:hover, .HamburgerDropdown .navbar-toggler[data-v-991790de]:focus, .HamburgerDropdown .navbar-toggler[data-v-991790de]:active {
+      text-decoration: none;
+      border: none;
+      outline: none; }
+    .HamburgerDropdown .navbar-toggler[data-v-991790de]:not(:disabled):not(.disabled) {
+      cursor: pointer; }
+    .HamburgerDropdown .navbar-toggler-icon[data-v-991790de] {
+      display: inline-block;
+      width: 4rem;
+      height: 3.25rem;
+      vertical-align: middle;
+      content: "";
+      background: no-repeat center center;
+      background-size: 100% 100%;
+      background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%232b2b2b' stroke-width='4' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E"); }
+  .HamburgerDropdown__body[data-v-991790de] {
+    z-index: 1;
+    position: absolute;
+    width: 100%;
+    white-space: nowrap;
+    padding: 0;
+    right: 0;
+    top: 72px;
+    list-style: none;
+    background-color: #fcfbf7; }
+    .HamburgerDropdown__body[aria-hidden="true"][data-v-991790de] {
+      display: none; }
+    .HamburgerDropdown__body a[data-v-991790de] {
+      display: inline-block;
+      padding: 1rem;
+      width: 100%;
+      color: #2b2b2b;
+      font-weight: 600;
+      text-decoration: none; }
+      .HamburgerDropdown__body a[data-v-991790de]:hover {
+        text-decoration: none;
+        background-color: rgba(0, 0, 0, 0.1); }
+    .HamburgerDropdown__body li[data-v-991790de]:not(:first-child) {
+      border-top: 1px solid #e0e0e0; }
+    .HamburgerDropdown__body li[data-v-991790de]:last-child {
+      border-bottom: 1px solid #e0e0e0; }
 

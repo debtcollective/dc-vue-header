@@ -3,13 +3,13 @@
     <svg width="40" height="40" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
       <g id="Canvas" fill="none">
         <g id="Mask Group">
-          <mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="40" height="40">
+          <mask :id="`mask0_${_uid}`" mask-type="alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="40" height="40">
             <g id="profile-pic">
               <circle cx="20" cy="20" r="20" fill="#C4C4C4"/>
             </g>
           </mask>
-          <g mask="url(#mask0)">
-            <g id="profile-pic_2">
+          <g :mask="`url(#mask0_${_uid})`">
+            <g :id="`profile-pic_2_${_uid}`">
               <circle cx="20" cy="20" r="20" fill="#C4C4C4"/>
             </g>
             <g id="Group 8">
