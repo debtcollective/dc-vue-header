@@ -1,1 +1,7 @@
 node_modules
+
+index.js
+bundle.css
+
+public/index.js
+public/bundle.css
