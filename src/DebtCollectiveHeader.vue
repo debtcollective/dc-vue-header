@@ -35,7 +35,7 @@
             <profile-dropdown :user="user" />
           </li>
           <li class="inline-block align-top mr1" v-else>
-            <a class="Header__link align-middle" :href="`${discourseEndpoint}/login`">
+            <a class="Header__link align-middle" :href="`${discourseEndpoint}/login`" rel="noopener noreferrer">
               <p class="nav-item-wrapper">Login or Sign Up</p>
             </a>
           </li>
@@ -55,7 +55,7 @@
 
       <div>
         <profile-dropdown v-if="user !== null" :user="user" style="float: right" />
-        <a v-else class="Header__link align-middle" :href="`${discourseEndpoint}/login`">
+        <a v-else class="Header__link align-middle" :href="`${discourseEndpoint}/login`" rel="noopener noreferrer">
           <p class="nav-item-wrapper xs-hide">Login or sign up</p>
           <p class="nav-item-wrapper sm-hide">Login</p>
         </a>
