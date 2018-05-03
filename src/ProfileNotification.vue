@@ -1,6 +1,6 @@
 <template>
   <div :class="`ProfileNotification ${read ? '-read' : '-unread'}`">
-    <a :href="href">
+    <a :href="href" rel="noopener noreferrer">
       <div class="ProfileNotification__icon">
         <div v-if="type === 'event'" class="ProfileNotification__icon-calendar">
           <calendar-icon />

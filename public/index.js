@@ -1942,7 +1942,8 @@ var ProfileNotification = {
       class: "ProfileNotification ".concat(_vm.read ? '-read' : '-unread')
     }, [_c('a', {
       attrs: {
-        "href": _vm.href
+        "href": _vm.href,
+        "rel": "noopener noreferrer"
       }
     }, [_c('div', {
       staticClass: "ProfileNotification__icon"
@@ -2103,7 +2104,8 @@ var ProfileDropdown = {
     }, [_c('a', {
       staticClass: "btn btn-primary profile",
       attrs: {
-        "href": _vm.profileHref
+        "href": _vm.profileHref,
+        "rel": "noopener noreferrer"
       }
     }, [_vm._v(" View Profile ")]), _vm._v(" "), _c('button', {
       staticClass: "btn btn-secondary log-out",
@@ -5216,6 +5218,8 @@ function w(a){return new n(function(b,c){function d(c){return function(d){h[c]=d
 
   self.fetch.polyfill = true;
 })(typeof self !== "undefined" ? self : undefined);
+
+window.DebtCollectiveHeader = DebtCollectiveHeader;
 
 exports.default = DebtCollectiveHeader;
 exports.DebtCollectiveHeader = DebtCollectiveHeader;

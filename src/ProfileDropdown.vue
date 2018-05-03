@@ -17,7 +17,7 @@
         No notifications!
       </div>
       <div class="ProfileDropdown__body-footer">
-        <a class="btn btn-primary profile" :href="profileHref">
+        <a class="btn btn-primary profile" :href="profileHref" rel="noopener noreferrer">
           View Profile
         </a>
         <button type="button" class="btn btn-secondary log-out">
