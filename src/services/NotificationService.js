@@ -48,7 +48,6 @@ export const getNotifications = () => {
   )
     .then(res => res.json())
     .then(({ notifications /*seen_notification_id*/ }) => {
-      console.log(notifications);
       return notifications.reduce(
         (ns, n) =>
           // If it doesn't have a title then it's not a notification type we currently support

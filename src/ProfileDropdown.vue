@@ -117,7 +117,6 @@ export default {
     getNotifications() {
       getNotifications()
         .then(notifications => {
-          console.log(notifications);
           this.rawNotifications = notifications;
         })
         .catch(({ error_type: errorType }) => {
