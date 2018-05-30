@@ -55,7 +55,7 @@
 
       <div>
         <profile-dropdown v-if="user !== null" :user="user" style="float: right" />
-        <a v-else class="Header__link align-middle" :href="`${discourseEndpoint}/login`" rel="noopener noreferrer">
+        <a v-else class="Header__link align-middle" :href="loginEndpoint" rel="noopener noreferrer">
           <p class="nav-item-wrapper xs-hide">Login or Sign up</p>
           <p class="nav-item-wrapper sm-hide">Login</p>
         </a>
@@ -102,6 +102,11 @@ export default {
     discourseEndpoint: {
       type: String,
       required: true
+    },
+    loginEndpoint: {
+      type: String,
+      required: false,
+      default: `${this.discourseEndpoint}/login`
     }
   },
   data() {
