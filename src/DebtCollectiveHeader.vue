@@ -35,7 +35,7 @@
             <profile-dropdown :user="user" />
           </li>
           <li class="inline-block align-top mr1" v-else>
-            <a class="Header__link align-middle" :href="`${discourseEndpoint}/login`" rel="noopener noreferrer">
+            <a class="Header__link align-middle" :href="loginEndpoint || `${discourseEndpoint}/login`" rel="noopener noreferrer">
               <p class="nav-item-wrapper md-hide">Login or Sign up</p>
               <p class="nav-item-wrapper lg-hide">Login</p>
           </li>
@@ -55,7 +55,7 @@
 
       <div>
         <profile-dropdown v-if="user !== null" :user="user" style="float: right" />
-        <a v-else class="Header__link align-middle" :href="loginEndpoint" rel="noopener noreferrer">
+        <a v-else class="Header__link align-middle" :href="loginEndpoint || `${discourseEndpoint}/login`" rel="noopener noreferrer">
           <p class="nav-item-wrapper xs-hide">Login or Sign up</p>
           <p class="nav-item-wrapper sm-hide">Login</p>
         </a>
@@ -68,7 +68,7 @@
 import DebtCollectiveHeaderDropdown from "./Dropdown.vue";
 import ProfileDropdown from "./ProfileDropdown.vue";
 import HamburgerDropdown from "./HamburgerDropdown.vue";
-import { getCurrentUser } from "./services/ProfileService";
+import { getCurrentUser, getCsrfToken } from "./services/ProfileService";
 import { discourseEndpoint } from "./services/service";
 
 export default {
@@ -103,10 +103,14 @@ export default {
       type: String,
       required: true
     },
+    toolsEndpoint: {
+      type: String,
+      required: true
+    },
     loginEndpoint: {
       type: String,
       required: false,
-      default: `${this.discourseEndpoint}/login`
+      default: null
     }
   },
   data() {
@@ -117,8 +121,12 @@ export default {
   },
   created() {
     window["@@discourse-endpoint"] = this.discourseEndpoint;
+    window["@@tools-endpoint"] = this.toolsEndpoint;
     getCurrentUser()
-      .then(u => (this.user = u))
+      .then(u => {
+        this.user = u;
+        return getCsrfToken();
+      })
       .catch(err => {
         if (err.status === 403 || err.error_type === "not_logged_in") {
           this.user = null;

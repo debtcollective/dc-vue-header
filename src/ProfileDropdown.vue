@@ -20,7 +20,7 @@
         <a class="btn btn-primary profile" :href="profileHref" rel="noopener noreferrer">
           View Profile
         </a>
-        <button type="button" class="btn btn-secondary log-out">
+        <button type="button" class="btn btn-secondary log-out" @click="handleLogout">
           Log out
         </button>
       </div>
@@ -36,7 +36,7 @@ import {
   isSystem,
   mapSystemToReadable
 } from "./services/NotificationService";
-import { getProfileLink } from "./services/ProfileService";
+import { getProfileLink, logout } from "./services/ProfileService";
 
 export default {
   components: { PlaceholderProfilePicture, ProfileNotification },
@@ -125,7 +125,8 @@ export default {
             this.loggedIn = false;
           }
         });
-    }
+    },
+    handleLogout: logout
   },
   created() {
     this.getNotifications();

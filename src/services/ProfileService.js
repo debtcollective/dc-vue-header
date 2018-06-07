@@ -1,7 +1,13 @@
-import { getOptions, discourseEndpoint, currentUser } from "./service";
+import {
+  getOptions,
+  deleteOptions,
+  discourseEndpoint,
+  toolsEndpoint,
+  currentUsername
+} from "./service";
 
 export const getProfileLink = () =>
-  `${discourseEndpoint()}/u/${((currentUser() || {}).user || {}).username}`;
+  `${discourseEndpoint()}/u/${((currentUsername() || {}).user || {}).username}`;
 
 export const getInboxLink = () => `${getProfileLink()}/messages`;
 
@@ -21,3 +27,22 @@ export const getCurrentUser = () =>
         });
     }
   });
+
+export const getCsrfToken = () =>
+  fetch(`${discourseEndpoint()}/session/csrf.json`, getOptions())
+    .then(res => res.json())
+    .then(({ csrf }) => {
+      window["@@csrf-token"] = csrf;
+    });
+
+const toBase = () => (window.location = "/");
+
+export const logout = () =>
+  fetch(
+    `${discourseEndpoint()}/session/${currentUsername()}`,
+    deleteOptions()
+  ).catch(() =>
+    fetch(`${toolsEndpoint()}/logout`, { credentials: "include" })
+      .then(toBase)
+      .catch(toBase)
+  );
