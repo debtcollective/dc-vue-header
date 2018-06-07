@@ -7,7 +7,7 @@ import {
 } from "./service";
 
 export const getProfileLink = () =>
-  `${discourseEndpoint()}/u/${((currentUsername() || {}).user || {}).username}`;
+  `${discourseEndpoint()}/u/${currentUsername()}`;
 
 export const getInboxLink = () => `${getProfileLink()}/messages`;
 
