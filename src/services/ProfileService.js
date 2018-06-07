@@ -2,6 +2,7 @@ import {
   getOptions,
   deleteOptions,
   discourseEndpoint,
+  toolsEndpoint,
   currentUsername
 } from "./service";
 
@@ -34,8 +35,14 @@ export const getCsrfToken = () =>
       window["@@csrf-token"] = csrf;
     });
 
+const toBase = () => (window.location = "/");
+
 export const logout = () =>
   fetch(
     `${discourseEndpoint()}/session/${currentUsername()}`,
     deleteOptions()
-  ).catch(() => (window.location = "/"));
+  ).catch(() =>
+    fetch(`${toolsEndpoint()}/logout`, { credentials: "include" })
+      .then(toBase)
+      .catch(toBase)
+  );

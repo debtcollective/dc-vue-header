@@ -35,7 +35,7 @@
             <profile-dropdown :user="user" />
           </li>
           <li class="inline-block align-top mr1" v-else>
-            <a class="Header__link align-middle" :href="`${discourseEndpoint}/login`" rel="noopener noreferrer">
+            <a class="Header__link align-middle" :href="loginEndpoint || `${discourseEndpoint}/login`" rel="noopener noreferrer">
               <p class="nav-item-wrapper md-hide">Login or Sign up</p>
               <p class="nav-item-wrapper lg-hide">Login</p>
           </li>
@@ -103,12 +103,11 @@ export default {
       type: String,
       required: true
     },
-    loginEndpoint: {
+    toolsEndpoint: {
       type: String,
-      required: false,
-      default: null
+      required: true
     },
-    logoutEndpoint: {
+    loginEndpoint: {
       type: String,
       required: false,
       default: null
@@ -122,6 +121,7 @@ export default {
   },
   created() {
     window["@@discourse-endpoint"] = this.discourseEndpoint;
+    window["@@tools-endpoint"] = this.toolsEndpoint;
     getCurrentUser()
       .then(u => {
         this.user = u;

@@ -1,4 +1,5 @@
 export const discourseEndpoint = () => window["@@discourse-endpoint"];
+export const toolsEndpoint = () => window["@@tools-endpoint"];
 export const currentUser = () => window["@@current-user"];
 export const csrfToken = () => window["@@csrf-token"];
 export const currentUsername = () =>
