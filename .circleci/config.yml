@@ -1,0 +1,54 @@
+version: 2
+
+defaults: &defaults
+  working_directory: ~/tdc-discourse-seed
+  docker:
+    - image: circleci/node:8.9.1
+
+jobs:
+  build_deploy:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "yarn.lock" }}
+
+      - run: yarn install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "yarn.lock" }}
+
+      - run:
+          name: Build
+          command: yarn build
+
+      - run:
+          name: Install python
+          command: sudo apt-get install python-dev
+      - run:
+          name: Download pip
+          command: curl -O https://bootstrap.pypa.io/get-pip.py
+      - run:
+          name: Install pip
+          command: python get-pip.py --user
+      - run:
+          name: Install awscli
+          command: ../.local/bin/pip install awscli --upgrade --user
+      - run:
+          name: Deploy to S3
+          command: |
+            ../.local/bin/aws s3 cp index.js s3://tds-static/js/dc-vue-header/$VERSION/index.min.js
+            ../.local/bin/aws s3 cp bundle.css s3://tds-static/css/dc-vue-header/$VERSION/index.min.css
+
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - build_deploy:
+          filters:
+            branches:
+              only:
+                - master
