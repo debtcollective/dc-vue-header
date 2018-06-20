@@ -10,7 +10,7 @@
 
       <div class="mt16" style="float: right;">
         <ul class="list-reset">
-          <li v-for="link in headerLinks" class="inline-block align-top" :key="link.href">
+          <li v-for="link in filteredHeaderLinks" class="inline-block align-top" :key="link.href">
             <div class="">
               <a
                 :class="`Header__link align-middle ${currentPath === link.href ? 'active' : ''}`"
@@ -27,12 +27,12 @@
           </li>
           <li class="inline-block align-top">
             <debt-collective-header-dropdown
-              :links="dropdownLinks"
+              :links="filteredDropdownLinks"
               style="margin-right: 1em"
             />
           </li>
           <li class="inline-block align-top" v-if="user !== null">
-            <profile-dropdown :user="user" />
+            <profile-dropdown />
           </li>
           <li class="inline-block align-top mr1" v-else>
             <a class="Header__link align-middle" :href="loginEndpoint || `${discourseEndpoint}/login`" rel="noopener noreferrer">
@@ -44,7 +44,7 @@
     </div>
 
     <div class="Header__height Header__mobile md-hide lg-hide">
-      <hamburger-dropdown :links="[...headerLinks, ...dropdownLinks]" />
+      <hamburger-dropdown :links="[...filteredHeaderLinks, ...filteredDropdownLinks]"/>
 
       <h1 :class="`Header__logo ${user !== null ? '-logged-in' : ''}`" style="margin: auto">
         <a :href="logoLink">
@@ -54,7 +54,7 @@
       </h1>
 
       <div>
-        <profile-dropdown v-if="user !== null" :user="user" style="float: right" />
+        <profile-dropdown v-if="user !== null" style="float: right" />
         <a v-else class="Header__link align-middle" :href="loginEndpoint || `${discourseEndpoint}/login`" rel="noopener noreferrer">
           <p class="nav-item-wrapper xs-hide">Login or Sign up</p>
           <p class="nav-item-wrapper sm-hide">Login</p>
@@ -70,6 +70,7 @@ import ProfileDropdown from "./ProfileDropdown.vue";
 import HamburgerDropdown from "./HamburgerDropdown.vue";
 import { getCurrentUser, getCsrfToken } from "./services/ProfileService";
 import { discourseEndpoint } from "./services/service";
+import filterLinks from "./utils/filterLinks";
 
 export default {
   components: {
@@ -119,12 +120,20 @@ export default {
       user: null
     };
   },
+  computed: {
+    filteredDropdownLinks() {
+      return filterLinks(this.dropdownLinks)(this.user);
+    },
+    filteredHeaderLinks() {
+      return filterLinks(this.headerLinks)(this.user);
+    }
+  },
   created() {
     window["@@discourse-endpoint"] = this.discourseEndpoint;
     window["@@tools-endpoint"] = this.toolsEndpoint;
     getCurrentUser()
-      .then(u => {
-        this.user = u;
+      .then(({ user }) => {
+        this.user = user;
         return getCsrfToken();
       })
       .catch(err => {
