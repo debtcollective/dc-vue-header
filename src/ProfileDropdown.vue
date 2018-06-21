@@ -41,12 +41,6 @@ import { getProfileLink, logout } from "./services/ProfileService";
 export default {
   components: { PlaceholderProfilePicture, ProfileNotification },
   name: "ProfileDropdown",
-  props: {
-    user: {
-      type: Object,
-      required: true
-    }
-  },
   data() {
     return {
       active: false,
