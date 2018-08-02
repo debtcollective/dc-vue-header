@@ -57,3 +57,16 @@ Then to implement the header somewhere, you just have to something like:
   });
 </script>
 ```
+
+### Developing this repo
+
+The best way to iterate is:
+
+```
+yarn build # builds the component and puts it in the public folder with a demo page
+yarn global add http-server
+http-server # ran in repo root will serve the demo page
+```
+
+You need to rebuild each time and make sure to clear your cache.
+Also you need discourse running on port 4000 for the demo page.
