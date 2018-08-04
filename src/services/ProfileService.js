@@ -17,7 +17,7 @@ export const getCurrentUser = () =>
     getOptions()
   ).then(res => {
     if (res.status === 403) {
-      throw res;
+      throw res // probably just no one was logged in
     } else {
       const username = res.headers.get("X-Discourse-Username");
       return fetch(`${discourseEndpoint()}/u/${username}`, getOptions())
