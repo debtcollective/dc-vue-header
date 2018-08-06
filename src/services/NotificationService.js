@@ -1,51 +1,43 @@
-import { getOptions, discourseEndpoint } from "./service";
+import { getOptions, discourseEndpoint } from './service';
 
 const notificationTypes = [
-  "mentioned",
-  "replied",
-  "quoted",
-  "edited",
-  "liked",
-  "privateMessage",
-  "invitedToPrivateMessage",
-  "inviteeAccepted",
-  "posted",
-  "movedPost",
-  "linked",
-  "grantedBadge",
-  "invitedToTopic",
-  "custom",
-  "groupMentioned",
-  "groupMessageSummary",
-  "watchingFirstPost",
-  "topicReminder"
+  'mentioned',
+  'replied',
+  'quoted',
+  'edited',
+  'liked',
+  'privateMessage',
+  'invitedToPrivateMessage',
+  'inviteeAccepted',
+  'posted',
+  'movedPost',
+  'linked',
+  'grantedBadge',
+  'invitedToTopic',
+  'custom',
+  'groupMentioned',
+  'groupMessageSummary',
+  'watchingFirstPost',
+  'topicReminder',
 ];
 
 export const getTopic = id =>
-  fetch(`${discourseEndpoint()}/t/${id}.json`, getOptions()).then(r =>
-    r.json()
-  );
+  fetch(`${discourseEndpoint()}/t/${id}.json`, getOptions()).then(r => r.json());
 
-export const isSystem = n => n.data.display_username === "system";
+export const isSystem = n => n.data.display_username === 'system';
 
 export const mapSystemToReadable = n => ({
   ...n,
-  data: { ...n.data, display_username: "Dispute Tools" }
+  data: { ...n.data, display_username: 'Dispute Tools' },
 });
 
-export const getTopicForNotification = notification =>
-  getTopic(notification.topic_id);
+export const getTopicForNotification = notification => getTopic(notification.topic_id);
 
 export const getLinkForNotification = notification =>
-  `${discourseEndpoint()}/t/${notification.topic_id}/${
-    notification.post_number
-  }`;
+  `${discourseEndpoint()}/t/${notification.topic_id}/${notification.post_number}`;
 
 export const getNotifications = () => {
-  return fetch(
-    `${discourseEndpoint()}/notifications?recent=true&limit=16`,
-    getOptions()
-  )
+  return fetch(`${discourseEndpoint()}/notifications?recent=true&limit=16`, getOptions())
     .then(res => res.json())
     .then(({ notifications /*seen_notification_id*/ }) => {
       return notifications.reduce(
@@ -56,11 +48,11 @@ export const getNotifications = () => {
                 ...ns,
                 {
                   ...n,
-                  type: notificationTypes[n.notification_type - 1]
-                }
+                  type: notificationTypes[n.notification_type - 1],
+                },
               ]
             : ns,
-        []
+        [],
       );
       /*
       return Promise.all(
