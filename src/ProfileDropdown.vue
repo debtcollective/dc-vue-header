@@ -1,7 +1,7 @@
 <template>
   <div class="ProfileDropdown">
     <button class="ProfileDropdown__head" role="button" @click="toggleActive">
-      <placeholder-profile-picture :has-unread="hasUnread"/>
+      <profile-picture :has-unread="hasUnread" />
       <span class="sr-only">Open/Close Profile Notifications</span>
     </button>
     <div class="ProfileDropdown__body" :aria-hidden="(!active).toString()">
@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import PlaceholderProfilePicture from "./PlaceholderProfilePicture.vue";
+import ProfilePicture from "./ProfilePicture.vue";
 import ProfileNotification from "./ProfileNotification.vue";
 import {
   getNotifications,
@@ -37,9 +37,10 @@ import {
   mapSystemToReadable
 } from "./services/NotificationService";
 import { getProfileLink, logout } from "./services/ProfileService";
+import { assertCurrentUser } from "./services/service";
 
 export default {
-  components: { PlaceholderProfilePicture, ProfileNotification },
+  components: { ProfilePicture, ProfileNotification },
   name: "ProfileDropdown",
   data() {
     return {
@@ -121,6 +122,9 @@ export default {
         });
     },
     handleLogout: logout
+  },
+  beforeCreate() {
+    assertCurrentUser();
   },
   created() {
     this.getNotifications();

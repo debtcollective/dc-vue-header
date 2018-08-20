@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
     "build": "rollup -c && cp index.js public/index.js && cp bundle.css public/bundle.css",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "precommit": "lint-staged"
   },
   "license": "MIT",
   "devDependencies": {
@@ -12,7 +13,11 @@
     "@vue/cli-plugin-eslint": "^3.0.0-beta.1",
     "@vue/cli-service": "^3.0.0-beta.1",
     "autoprefixer": "^8.1.0",
+    "http-server": "^0.11.1",
+    "husky": "^0.14.3",
+    "lint-staged": "^7.0.0",
     "postcss-csso": "^3.0.0",
+    "prettier": "^1.11.1",
     "rollup": "^0.56.4",
     "rollup-plugin-babel": "^4.0.0-beta.2",
     "rollup-plugin-commonjs": "^9.0.0",
@@ -43,5 +48,9 @@
     "postcss-css-variables": "^0.8.1",
     "postcss-nested": "^3.0.0",
     "promis": "^1.1.4"
+  },
+  "lint-staged": {
+      "*.js?(.es6)": ["prettier --write", "git add"],
+      "*.vue": ["vue-cli-service lint", "git add"]
   }
 }

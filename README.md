@@ -57,3 +57,30 @@ Then to implement the header somewhere, you just have to something like:
   });
 </script>
 ```
+
+### Developing this repo
+
+####Set up
+
+You need discourse running with CORS enabled:
+
+```
+DISCOURSE_ENABLE_CORS=true bundle exec rails server
+```
+
+Make sure nothing is running on port 8080 (for example, `dispute-tools`).
+
+```
+yarn install
+```
+
+####Iterating
+
+The best way to iterate is:
+
+```
+yarn build # builds the component and puts it in the public folder with a demo page
+http-server # ran in repo root will serve the demo page
+```
+
+You need to rebuild each time and make sure to clear your cache.

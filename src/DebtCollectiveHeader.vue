@@ -69,7 +69,7 @@ import DebtCollectiveHeaderDropdown from "./Dropdown.vue";
 import ProfileDropdown from "./ProfileDropdown.vue";
 import HamburgerDropdown from "./HamburgerDropdown.vue";
 import { getCurrentUser, getCsrfToken } from "./services/ProfileService";
-import { discourseEndpoint } from "./services/service";
+import { discourseEndpoint } from "./services/service"; // eslint-disable-line no-unused-vars
 import filterLinks from "./utils/filterLinks";
 
 export default {
