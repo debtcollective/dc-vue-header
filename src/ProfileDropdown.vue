@@ -1,5 +1,5 @@
 <template>
-  <div class="ProfileDropdown">
+  <div class="ProfileDropdown" ref="container">
     <button class="ProfileDropdown__head" role="button" @click="toggleActive">
       <profile-picture :has-unread="hasUnread" />
       <span class="sr-only">Open/Close Profile Notifications</span>
@@ -87,27 +87,10 @@ export default {
   methods: {
     toggleActive() {
       this.toggled = true;
-
-      // if (!this.active) {
-      //   document.addEventListener("click", this.handleOffMenuClick);
-      // } else {
-      //   document.removeEventListener("click", this.handleOffMenuClick);
-      // }
-
       this.active = !this.active;
-
       if (this.active) {
         this.getNotifications();
       }
-    },
-    handleOffMenuClick({ target: { classList } }) {
-      // Prevent clicks on the menu from closing the dropdown but also set
-      // clicking the profile picture to close the dropdown
-      if (
-        classList.toString().indexOf("ProfileDropdown") === -1 &&
-        !classList.contains("ProfileDropdown__head")
-      )
-        this.toggleActive();
     },
     getNotifications() {
       getNotifications()
@@ -121,13 +104,23 @@ export default {
           }
         });
     },
-    handleLogout: logout
+    handleLogout: logout,
+    handleClicks() {
+      document.addEventListener("click", ({ target }) => {
+        if (!this.active) return;
+        const { container } = this.$refs;
+        if (!container.contains(target)) {
+          this.toggleActive();
+        }
+      });
+    }
   },
   beforeCreate() {
     assertCurrentUser();
   },
   created() {
     this.getNotifications();
+    this.handleClicks();
   }
 };
 </script>
