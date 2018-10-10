@@ -12,7 +12,7 @@
       </button>
       <ul class="Dropdown__body" aria-label="submenu" :aria-hidden="(!active).toString()">
         <li v-for="link in links" :key="link.href">
-          <a :href="link.href" class="Dropdown__item" role="button" :onclick="link.onclick" :title="link.title">
+          <a :href="link.href" class="Dropdown__item" role="button" :onclick="link.onclick" :title="link.title" :rel="link.href[0] !== '/' ? 'noopener noreferrer' : ''">
             {{link.text}}
           </a>
         </li>

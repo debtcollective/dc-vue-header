@@ -17,6 +17,7 @@
                 :href="link.href"
                 :title="link.title"
                 :onclick="link.onclick"
+                :rel="link.href[0] !== '/' ? 'noopener noreferrer' : ''"
                 >
                 <p class="nav-item-wrapper">
                   {{link.text}}
