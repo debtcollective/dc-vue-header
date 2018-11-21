@@ -50,7 +50,13 @@
     "promis": "^1.1.4"
   },
   "lint-staged": {
-      "*.js?(.es6)": ["prettier --write", "git add"],
-      "*.vue": ["vue-cli-service lint", "git add"]
+    "*.js?(.es6)": [
+      "prettier --write",
+      "git add"
+    ],
+    "*.vue": [
+      "vue-cli-service lint",
+      "git add"
+    ]
   }
 }

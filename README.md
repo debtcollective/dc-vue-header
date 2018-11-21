@@ -58,9 +58,9 @@ Then to implement the header somewhere, you just have to something like:
 </script>
 ```
 
-### Developing this repo
+## Developing this repo
 
-####Set up
+### Set up
 
 You need discourse running with CORS enabled:
 
@@ -74,13 +74,17 @@ Make sure nothing is running on port 8080 (for example, `dispute-tools`).
 yarn install
 ```
 
-####Iterating
+### Iterating
 
 The best way to iterate is:
 
 ```
-yarn build # builds the component and puts it in the public folder with a demo page
-http-server # ran in repo root will serve the demo page
+# builds the component and puts it in the public folder with a demo page
+yarn build
+# ran in repo root will serve the demo page (https://github.com/indexzero/http-server)
+node_modules/.bin/http-server
 ```
 
-You need to rebuild each time and make sure to clear your cache.
+You need to rebuild each time and make sure to clear your cache. At this point the expected behavior is that running the Discourse instance and then this application whenever you log in into Discourse the header will get updated.
+
+In case of any issue with the expected behavior check the console for error, typically the CORS may be set wrongly or you should refresh both pages (localhost:3000 and localhost:8080)

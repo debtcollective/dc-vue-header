@@ -1,5 +1,6 @@
 import { getOptions, discourseEndpoint } from './service';
 
+// check discourse notification types at: https://goo.gl/Lcyhp3
 const notificationTypes = [
   'mentioned',
   'replied',
@@ -33,67 +34,28 @@ export const mapSystemToReadable = n => ({
 
 export const getTopicForNotification = notification => getTopic(notification.topic_id);
 
-export const getLinkForNotification = notification =>
-  `${discourseEndpoint()}/t/${notification.topic_id}/${notification.post_number}`;
+export const getLinkForNotification = notification => {
+  if (!notification.topic_id || !notification.post_number) {
+    // eslint-disable-next-line
+    console.warn('Trying to get a notification link with invalid format', notification);
+    return '#';
+  }
+
+  return `${discourseEndpoint()}/t/${notification.topic_id}/${notification.post_number}`;
+};
 
 export const getNotifications = () => {
-  return fetch(`${discourseEndpoint()}/notifications?recent=true&limit=16`, getOptions())
-    .then(res => res.json())
-    .then(({ notifications /*seen_notification_id*/ }) => {
-      return notifications.reduce(
-        (ns, n) =>
-          // If it doesn't have a title then it's not a notification type we currently support
-          n.fancy_title
-            ? [
-                ...ns,
-                {
-                  ...n,
-                  type: notificationTypes[n.notification_type - 1],
-                },
-              ]
-            : ns,
-        [],
-      );
-      /*
-      return Promise.all(
-        notifications.reduce((promises, n) => {
-          const {
-            notification_type,
-            fancy_title: title,
-            read,
-            topic_id,
-            id,
-            data
-          } = n;
-          const type = notificationTypes[notification_type - 1];
+  return (
+    fetch(`${discourseEndpoint()}/notifications?recent=true&limit=16`, getOptions())
+      .then(res => res.json())
+      .then(({ notifications }) => {
+        // Support notifications with fancy_title only and append a readable "type" of notification
+        const reducerFunction = (ns, n) =>
+          n.fancy_title ? [...ns, { ...n, type: notificationTypes[n.notification_type - 1] }] : ns;
 
-          if (!title) return promises;
-
-          if (type === "posted") {
-            return [
-              ...promises,
-              getTopic(topic_id).then(topic => {
-                const { last_read_post_number, highest_post_number } = topic;
-                return {
-                  type,
-                  title,
-                  data,
-                  read,
-                  topic,
-                  unreadCount: highest_post_number - last_read_post_number,
-                  id
-                };
-              })
-            ];
-          } else {
-            return [
-              ...promises,
-              Promise.resolve({ type, title, read, data, id })
-            ];
-          }
-        }, [])
-      );
-      */
-    })
-    .catch(console.error);
+        return notifications.reduce(reducerFunction, []);
+      })
+      // eslint-disable-next-line
+      .catch(console.error)
+  );
 };
