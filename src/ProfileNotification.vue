@@ -60,27 +60,27 @@ export default {
       }
     },
     summary() {
-      const n = this.notification;
+      const notification = this.notification;
 
-      switch (n.type) {
+      switch (notification.type) {
         case "quoted":
         case "edited":
         case "liked":
           return {
-            title: `${n.data.original_username} has ${n.type} something yours`,
-            content: n.fancy_title
+            title: `${notification.data.original_username} has ${notification.type} something yours`,
+            content: notification.fancy_title
           };
         case "posted":
           if (this.unreadCount > 1) {
             return {
               title: `${this.unreadCount} new replies to:`,
-              content: n.fancy_title
+              content: notification.fancy_title
             };
           } else {
-            const { display_username: name } = n.data;
+            const { display_username: name } = notification.data;
             return {
               title: `${name} replied to:`,
-              content: n.fancy_title
+              content: notification.fancy_title
             };
           }
         case "event":
@@ -88,38 +88,38 @@ export default {
         case "aggregatedSystem":
           return {
             title: `You have ${
-              n.aggregatedSystem.count
+              notification.aggregatedSystem.count
             } dispute updates.`,
             content: "Click here to go to your inbox"
           };
         case "invitedToPrivateMessage":
         case "privateMessage":
-          if (n.post_number === 1) {
-            const { display_username: name } = n.data;
+          if (notification.post_number === 1) {
+            const { display_username: name } = notification.data;
 
             if (name === "Dispute Tools") {
               return {
                 title: `${name} update:`,
-                content: n.fancy_title
+                content: notification.fancy_title
               };
             } else {
               return {
                 title: `${name} sent you a private message:`,
-                content: n.fancy_title
+                content: notification.fancy_title
               };
             }
           } else {
-            const { display_username: name } = n.data;
+            const { display_username: name } = notification.data;
             return {
               title: `${name} replied to:`,
-              content: n.fancy_title
+              content: notification.fancy_title
             };
           }
         default:
-          console.warn(`Unhandled "${n.type}" notification`, n);
+          console.warn(`Unhandled "${notification.type}" notification`, n);
           return {
-            title: `${n.type} new notification`,
-            content: n.fancy_title
+            title: `${notification.type} new notification`,
+            content: notification.fancy_title
           };
       }
     }
