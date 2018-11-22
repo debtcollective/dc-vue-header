@@ -74,6 +74,14 @@ Make sure nothing is running on port 8080 (for example, `dispute-tools`).
 yarn install
 ```
 
+Make sure to add your configuration file by:
+
+```
+cp public/config.sample.js public/config.js
+```
+
+Once you have the configuration file, update the example values in order to activate things like Sentry.
+
 ### Iterating
 
 The best way to iterate is:
