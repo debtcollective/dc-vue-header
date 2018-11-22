@@ -1,5 +1,5 @@
 import { getOptions, discourseEndpoint } from "./service";
-import { captureMessage } from "./service/ErrorService";
+import { captureMessage } from "./ErrorService";
 
 // check discourse notification types at: https://goo.gl/Lcyhp3
 const notificationTypes = [
