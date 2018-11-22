@@ -1,4 +1,5 @@
 import { getOptions, discourseEndpoint } from "./service";
+import { captureMessage } from "./service/ErrorService";
 
 // check discourse notification types at: https://goo.gl/Lcyhp3
 const notificationTypes = [
@@ -39,11 +40,9 @@ export const getTopicForNotification = notification =>
 
 export const getLinkForNotification = notification => {
   if (!notification.topic_id || !notification.post_number) {
-    // eslint-disable-next-line
-    console.warn(
-      "Trying to get a notification link with invalid format",
+    captureMessage("Trying to get a notification link with invalid format", {
       notification
-    );
+    });
     return "#";
   }
 

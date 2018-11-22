@@ -3,6 +3,7 @@ node_modules
 index.js
 bundle.css
 
+public/config.js
 public/index.js
 public/bundle.css
 
