@@ -33,7 +33,6 @@ import {
   getLinkForNotification
 } from "./services/NotificationService";
 import { getInboxLink } from "./services/ProfileService";
-import { captureMessage } from "./services/ErrorService";
 
 export default {
   name: "ProfileNotification",
@@ -117,8 +116,6 @@ export default {
             };
           }
         default:
-          captureMessage(`Unhandled "${notification.type}" notification`, { notification });
-
           return {
             title: `${notification.type} new notification`,
             content: notification.fancy_title
