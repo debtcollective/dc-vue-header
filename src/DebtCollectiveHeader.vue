@@ -138,11 +138,7 @@ export default {
         return getCsrfToken();
       })
       .catch(err => {
-        if (err.status === 403 || err.error_type === "not_logged_in") {
-          this.user = null;
-        } else {
-          console.error(err);
-        }
+        console.error(err);
       });
   }
 };

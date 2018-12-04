@@ -53,26 +53,34 @@ export default {
   computed: {
     href() {
       switch (this.notification.type) {
-        case "posted":
-        case "privateMessage":
-          return getLinkForNotification(this.notification);
         case "aggregatedSystem":
           return getInboxLink();
+        default:
+          return getLinkForNotification(this.notification);
       }
     },
     summary() {
-      switch (this.notification.type) {
+      const notification = this.notification;
+
+      switch (notification.type) {
+        case "quoted":
+        case "edited":
+        case "liked":
+          return {
+            title: `${notification.data.original_username} has ${notification.type} something yours`,
+            content: notification.fancy_title
+          };
         case "posted":
           if (this.unreadCount > 1) {
             return {
               title: `${this.unreadCount} new replies to:`,
-              content: this.notification.fancy_title
+              content: notification.fancy_title
             };
           } else {
-            const { display_username: name } = this.notification.data;
+            const { display_username: name } = notification.data;
             return {
               title: `${name} replied to:`,
-              content: this.notification.fancy_title
+              content: notification.fancy_title
             };
           }
         case "event":
@@ -80,32 +88,38 @@ export default {
         case "aggregatedSystem":
           return {
             title: `You have ${
-              this.notification.aggregatedSystem.count
+              notification.aggregatedSystem.count
             } dispute updates.`,
             content: "Click here to go to your inbox"
           };
+        case "invitedToPrivateMessage":
         case "privateMessage":
-          if (this.notification.post_number === 1) {
-            const { display_username: name } = this.notification.data;
+          if (notification.post_number === 1) {
+            const { display_username: name } = notification.data;
 
             if (name === "Dispute Tools") {
               return {
                 title: `${name} update:`,
-                content: this.notification.fancy_title
+                content: notification.fancy_title
               };
             } else {
               return {
                 title: `${name} sent you a private message:`,
-                content: this.notification.fancy_title
+                content: notification.fancy_title
               };
             }
           } else {
-            const { display_username: name } = this.notification.data;
+            const { display_username: name } = notification.data;
             return {
               title: `${name} replied to:`,
-              content: this.notification.fancy_title
+              content: notification.fancy_title
             };
           }
+        default:
+          return {
+            title: `${notification.type} new notification`,
+            content: notification.fancy_title
+          };
       }
     }
   },
