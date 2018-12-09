@@ -130,26 +130,48 @@ export default {
 @import "./shared";
 
 .Header__mobile {
-  .ProfileDropdown__body {
-    right: 0;
-    width: 100%;
-    border-left: none;
-    border-right: none;
-    border-radius: 0;
+  .ProfileDropdown {
+    &__body {
+      border-radius: 0;
+      border-bottom-left-radius: 4px;
+      border-bottom-right-radius: 4px;
+      border-left: none;
+      border-right: none;
+      right: 0;
+      width: 100%;
 
-    &::before {
-      right: 34px;
+      &::before {
+        right: 25px;
+      }
     }
+
+    @media (max-width: 52em) {
+      margin: 0 1rem 0 0;
+    }
+  }
+
+  .ProfileDropdown__body-footer {
+    border-left: 1px solid $color--notification-footer-border;
+    border-bottom-left-radius: 4px;
+    border-right: 1px solid $color--notification-footer-border;
+    border-bottom-right-radius: 4px;
+  }
+
+  .ProfileDropdown__body-content {
+    border-left: 1px solid $color--header-border;
+    border-right: 1px solid $color--header-border;
   }
 }
 
 .ProfileDropdown {
-  margin-left: 2em;
+  margin-left: 48px;
   margin-right: 1em;
 
   &__head {
     border: none;
     background-color: transparent;
+    outline: none;
+    padding: 0;
 
     &:hover {
       cursor: pointer;
@@ -162,7 +184,7 @@ export default {
     width: 29rem;
     white-space: nowrap;
     padding: 0;
-    right: 1.5rem;
+    right: 12px;
     top: 71px;
     list-style: none;
     border-bottom-left-radius: 8px;
@@ -198,12 +220,14 @@ export default {
 
     &-content {
       max-height: 17.5rem;
+      overflow-x: hidden;
       overflow-y: scroll;
     }
 
     &-footer {
-      padding: 0.5rem 0.25rem;
+      padding: 0.5rem 0.5rem;
       border-top: 1px solid $text-0;
+      display: flex;
 
       .profile,
       .profile:hover {
@@ -213,13 +237,21 @@ export default {
         margin-right: 0;
       }
 
+      .profile,
       .log-out {
-        width: 36.5%;
+        margin: 0;
+        padding-bottom: 9px;
+        padding-top: 9px;
+      }
+
+      .log-out {
+        flex: 1;
+        margin-left: 0.5rem;
       }
     }
   }
 
-  &__notification {
+  &__notification:not(:first-child) {
     border-top: 1px solid $text-3;
   }
 }

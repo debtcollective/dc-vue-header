@@ -95,20 +95,44 @@
   .xs-hide {
     display: none !important;
   }
+
+  .xs-invisible {
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+  }
 }
 @media (min-width: 40em) and (max-width: 52em) {
   .sm-hide {
     display: none !important;
+  }
+
+  .sm-invisible {
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
   }
 }
 @media (min-width: 52em) and (max-width: 64em) {
   .md-hide {
     display: none !important;
   }
+
+  .md-invisible {
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+  }
 }
 @media (min-width: 64em) {
   .lg-hide {
     display: none !important;
+  }
+
+  .lg-invisible {
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
   }
 }
 

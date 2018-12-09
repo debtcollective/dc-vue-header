@@ -1,6 +1,6 @@
 <template>
   <div class="Header">
-    <div class="Header__height Header__width sm-hide xs-hide">
+    <div class="Header__height Header__width sm-invisible xs-invisible">
       <h1 class="Header__logo" style="float: left">
         <a :href="logoLink">
           <img class="Header__logo-img" :src="logoUrl" />
@@ -8,39 +8,41 @@
         </a>
       </h1>
 
-      <div class="mt16" style="float: right;">
-        <ul class="list-reset">
-          <li v-for="link in filteredHeaderLinks" class="inline-block align-top" :key="link.href">
-            <div class="">
-              <a
-                :class="`Header__link align-middle ${currentPath === link.href ? 'active' : ''}`"
-                :href="link.href"
-                :title="link.title"
-                :onclick="link.onclick"
-                :rel="link.href[0] !== '/' ? 'noopener noreferrer' : ''"
-                >
-                <p class="nav-item-wrapper">
-                  {{link.text}}
-                </p>
-                <div class="active-underline" />
-              </a>
-            </div>  
-          </li>
-          <li class="inline-block align-top">
-            <debt-collective-header-dropdown
-              :links="filteredDropdownLinks"
-              style="margin-right: 1em"
-            />
-          </li>
-          <li class="inline-block align-top" v-if="user !== null">
-            <profile-dropdown />
-          </li>
-          <li class="inline-block align-top mr1" v-else>
-            <a class="Header__link align-middle" :href="loginEndpoint || `${discourseEndpoint}/login`" rel="noopener noreferrer">
-              <p class="nav-item-wrapper md-hide">Login or Sign up</p>
-              <p class="nav-item-wrapper lg-hide">Login</p>
-          </li>
-        </ul>
+      <div style="display: flex; justify-content: flex-end; height: 100%;">
+        <nav class="Header__nav">
+          <ul class="list-reset">
+            <li v-for="link in filteredHeaderLinks" class="inline-block align-top nav-link nav-item" :key="link.href">
+              <div class="">
+                <a
+                  :class="`Header__link align-middle ${currentPath === link.href ? 'active' : ''}`"
+                  :href="link.href"
+                  :title="link.title"
+                  :onclick="link.onclick"
+                  :rel="link.href[0] !== '/' ? 'noopener noreferrer' : ''"
+                  >
+                  <p class="nav-item-wrapper">
+                    {{link.text}}
+                  </p>
+                  <div class="active-underline" />
+                </a>
+              </div>  
+            </li>
+            <li id="more-item" class="inline-block align-top nav-item" style="display: none;">
+              <debt-collective-header-dropdown
+                :links="filteredDropdownLinks"
+                style="margin-right: 1em"
+              />
+            </li>
+          </ul>
+        </nav>
+        <div id="session-item" class="inline-block align-top nav-item" v-if="user !== null">
+          <profile-dropdown />
+        </div>
+        <div id="session-item" class="inline-block align-top nav-item" v-else>
+          <a class="Header__link align-middle" :href="loginEndpoint || `${discourseEndpoint}/login`" rel="noopener noreferrer">
+            <p class="nav-item-wrapper md-hide">Login or Sign up</p>
+            <p class="nav-item-wrapper lg-hide">Login</p>
+        </div>
       </div>
     </div>
 
@@ -72,6 +74,7 @@ import HamburgerDropdown from "./HamburgerDropdown.vue";
 import { getCurrentUser, getCsrfToken } from "./services/ProfileService";
 import { discourseEndpoint } from "./services/service"; // eslint-disable-line no-unused-vars
 import filterLinks from "./utils/filterLinks";
+import { bindPriorityPattern } from "./utils/responsiveness";
 
 export default {
   components: {
@@ -130,16 +133,28 @@ export default {
     }
   },
   created() {
-    window["@@discourse-endpoint"] = this.discourseEndpoint;
-    window["@@tools-endpoint"] = this.toolsEndpoint;
-    getCurrentUser()
-      .then(({ user }) => {
-        this.user = user;
-        return getCsrfToken();
-      })
-      .catch(err => {
-        console.error(err);
-      });
+    this.computeUser();
+  },
+  mounted() {
+    this.bindPriorityPattern();
+  },
+  methods: {
+    computeUser() {
+      window["@@discourse-endpoint"] = this.discourseEndpoint;
+      window["@@tools-endpoint"] = this.toolsEndpoint;
+      getCurrentUser()
+        .then(({ user }) => {
+          this.user = user;
+          return getCsrfToken();
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    },
+    bindPriorityPattern() {
+      // https://bit.ly/2QzILIm
+      bindPriorityPattern(this.$el);
+    }
   }
 };
 </script>
@@ -147,6 +162,12 @@ export default {
 <style scoped lang="scss">
 @import "./variables";
 @import "./shared";
+
+#session-item a {
+  display: flex;
+  height: 100%;
+  align-items: center;
+}
 
 .Header {
   z-index: 2;
@@ -156,14 +177,37 @@ export default {
   right: 0;
   height: 72px;
   color: $text-0;
-  border-bottom: 1px solid $text-4;
-  background-color: #fcfbf7;
+  border-bottom: 1px solid $color--header-border;
+  background-color: $color--header-bg;
   font-family: "Libre Franklin", "Helvetica Neue", Arial, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   margin: 0;
 
   .Dropdown__label {
     max-width: 150px;
+  }
+
+  &__nav {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex: 1;
+    height: 100%;
+
+    .hidden-nav-link {
+      display: none;
+    }
+
+    .dropdown-container {
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-item a {
+      display: flex;
+      align-items: center;
+    }
   }
 
   &__height {
@@ -174,25 +218,30 @@ export default {
     display: block;
     height: 54px;
     margin: 9px 9px;
+
+    @media (max-width: 52em) {
+      margin: 0;
+      height: 48px;
+    }
   }
 
   &__link {
     color: $text-0;
     font-weight: 600;
     height: 100%;
+    position: relative;
 
     &.active {
-      position: relative;
-
-      .nav-item-wrapper {
-        height: 36px;
-      }
 
       .active-underline {
-        border: 2px solid $dc-red;
-        border-radius: 5px;
         background-color: $dc-red;
+        border-radius: 5px;
+        border: 2px solid $dc-red;
+        bottom: 18px;
+        left: 0;
         margin: 0 5%;
+        position: absolute;
+        right: 0;
       }
     }
   }
@@ -217,14 +266,12 @@ export default {
 
     .Header {
       &__logo {
-        @media (max-width: 40em) {
-          padding-left: 5%;
+        > a {
+          display: block;
         }
 
-        &:not(.-logged-in) {
-          @media (min-width: 40em) and (max-width: 52em) {
-            padding-left: 10%;
-          }
+        @media (max-width: 52em) {
+          padding: 0;
         }
       }
     }
