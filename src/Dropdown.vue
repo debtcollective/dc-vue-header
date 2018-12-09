@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="dropdown-container">
     <div class="align-middle Dropdown">
       <button :class="`Dropdown__head nav-item-wrapper ${active ? 'active' : ''}`" type="button" @click="toggleActive">More 
         <svg width="16" height="11" viewBox="0 0 16 11" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
