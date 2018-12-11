@@ -65,6 +65,9 @@ export const priorityPattern = container => {
 
     // we hide the item that we just pretend to move
     latestItem.classList.add("hidden-nav-link");
+
+    // In case we need to move more than one item for certain pixel width
+    priorityPattern(container);
   } else if (
     (firstOnDropdownWidth &&
       allNavLinksWidth + dropdownWidth < navContainerWidth - pixelGap) ||
