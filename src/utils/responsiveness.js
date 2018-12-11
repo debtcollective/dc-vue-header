@@ -17,7 +17,7 @@ const toggleDropdownVisibility = dropdown => {
  */
 export const priorityPattern = container => {
   const dropdown = container.querySelector("#more-item");
-  const dropdownWidth = dropdown.getBoundingClientRect().width;
+  const dropdownWidth = dropdown.clientWidth;
   const dropdownItemsCount = dropdown.querySelectorAll("li").length;
 
   const links = [
@@ -32,11 +32,11 @@ export const priorityPattern = container => {
   });
 
   const nav = container.querySelector(".Header__nav");
-  const navContainerWidth = nav.getBoundingClientRect().width;
+  const navContainerWidth = nav.clientWidth;
   let emptySpace = navContainerWidth - navLinksWidth;
 
   const latestItem = links.slice(-1)[0];
-  const latestItemWidth = latestItem.getBoundingClientRect().width;
+  const latestItemWidth = latestItem.clientWidth;
 
   if (dropdownItemsCount > 0) {
     // we now know the dropdown is being visible
