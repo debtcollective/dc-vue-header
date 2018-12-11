@@ -49,13 +49,11 @@ export const priorityPattern = container => {
     : 0;
 
   const allNavLinksWidth = navLinksWidth + firstOnDropdownWidth;
+  // Avoid to wait to the latest pixel and safely ensure the layout won't break
+  const pixelGap = 5;
 
-  if (emptySpace <= 0) {
+  if (emptySpace <= pixelGap) {
     // move the latest item to the dropdown
-    window.test = {
-      dropdown,
-      latestItem
-    };
     dropdown
       .querySelector("ul")
       .insertAdjacentHTML(
@@ -69,8 +67,9 @@ export const priorityPattern = container => {
     latestItem.classList.add("hidden-nav-link");
   } else if (
     (firstOnDropdownWidth &&
-      allNavLinksWidth + dropdownWidth < navContainerWidth) ||
-    (dropdownItemsCount === 1 && allNavLinksWidth < navContainerWidth)
+      allNavLinksWidth + dropdownWidth < navContainerWidth - pixelGap) ||
+    (dropdownItemsCount === 1 &&
+      allNavLinksWidth < navContainerWidth - pixelGap)
   ) {
     // put more latest item back
     container
