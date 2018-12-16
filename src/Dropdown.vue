@@ -107,6 +107,7 @@ export default {
   .Dropdown__body .dropdown-item-extra .nav-item-wrapper {
     height: auto;
     padding: 0;
+    border: none !important; 
   }
 </style>
 
