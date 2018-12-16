@@ -121,24 +121,22 @@ export default {
   &__head {
     background: none;
     border-radius: 4px;
-    border: none;
+    border: 1px solid transparent;
     box-sizing: border-box;
     color: inherit;
     font-family: inherit;
     font-size: inherit;
     font-weight: 600;
-    outline: none !important;
-    padding: 6px 18px;
+    outline: none;
+    padding: #{$rule--nav-link-pad};
 
     &.active {
-      padding: 9px 17px;
-      border: 1px solid $text-3;
+      border-color: $color--header-link-border;
       color: $text-0 !important;
     }
 
     &:hover {
       cursor: pointer;
-      padding: 6px 17px;
     }
   }
 }

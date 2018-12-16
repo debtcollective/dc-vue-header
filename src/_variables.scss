@@ -1,3 +1,18 @@
+// Colors
+$hint-of-red:                               #FCFBF7;
+$french-grey:                               #BDBDBD;
+$jaguar:                                    #2B2B2B;
+$red-orange:                                #FF4630;
+
+// Components
+$color--header-bg:                          $hint-of-red;
+$color--header-border:                      $french-grey;
+$color--header-link-border:                 $french-grey;
+$color--header-link-active-border:          $red-orange;
+
+// Shared rules
+$rule--nav-link-pad:                        "11px 15px";
+
 $header-height: 72px;
 $k-font-family: "Libre Franklin", "Helvetica Neue", Arial, sans-serif,
   "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";

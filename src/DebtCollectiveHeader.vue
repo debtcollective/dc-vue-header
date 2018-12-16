@@ -27,7 +27,7 @@
                 </a>
               </div>  
             </li>
-            <li id="more-item" class="inline-block align-top nav-item">
+            <li id="more-item" class="inline-block align-top nav-item" style="display: none;">
               <debt-collective-header-dropdown
                 :links="filteredDropdownLinks"
                 style="margin-right: 1em"
@@ -177,8 +177,8 @@ export default {
   right: 0;
   height: 72px;
   color: $text-0;
-  border-bottom: 1px solid $text-4;
-  background-color: #fcfbf7;
+  border-bottom: 1px solid $color--header-border;
+  background-color: $color--header-bg;
   font-family: "Libre Franklin", "Helvetica Neue", Arial, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   margin: 0;
