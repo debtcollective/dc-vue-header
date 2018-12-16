@@ -109,6 +109,10 @@ export default {
     padding: 0;
     border: none !important; 
   }
+
+  .Dropdown__body .dropdown-item-extra .Header__link {
+    margin: 0 !important;
+  }
 </style>
 
 
