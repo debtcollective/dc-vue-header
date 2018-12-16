@@ -120,14 +120,15 @@ export default {
 
   &__head {
     background: none;
+    border-radius: 4px;
+    border: none;
+    box-sizing: border-box;
     color: inherit;
     font-family: inherit;
     font-size: inherit;
     font-weight: 600;
+    outline: none !important;
     padding: 6px 18px;
-    border-radius: 4px;
-    box-sizing: border-box;
-    border: none;
 
     &.active {
       padding: 9px 17px;
