@@ -1,6 +1,6 @@
-const toggleDropdownVisibility = dropdown => {
+const toggleDropdownVisibility = (dropdown, links) => {
   // Only shows the dropdown if there is somthing within
-  let links = dropdown.querySelectorAll("li");
+  links = links || dropdown.querySelectorAll("li");
 
   if (links.length > 0) {
     dropdown.style.display = "inline-block";
@@ -17,8 +17,10 @@ const toggleDropdownVisibility = dropdown => {
  */
 export const priorityPattern = container => {
   const dropdown = container.querySelector("#more-item");
-  const dropdownWidth = dropdown.clientWidth;
-  const dropdownItemsCount = dropdown.querySelectorAll("li").length;
+  const dropdownItems = dropdown.querySelectorAll("li");
+
+  // Take the width only after ensuring the dropdown is visible otherwise will be 0
+  let dropdownWidth;
 
   const links = [
     ...container.querySelectorAll("nav ul > .nav-link:not(.hidden-nav-link)")
@@ -38,8 +40,10 @@ export const priorityPattern = container => {
   const latestItem = links.slice(-1)[0];
   const latestItemWidth = latestItem.clientWidth;
 
-  if (dropdownItemsCount > 0) {
+  if (dropdownItems.length > 0) {
+    toggleDropdownVisibility(dropdown, dropdownItems);
     // we now know the dropdown is being visible
+    dropdownWidth = dropdown.clientWidth;
     emptySpace = Math.ceil(emptySpace - dropdownWidth);
   }
 
@@ -71,7 +75,7 @@ export const priorityPattern = container => {
   } else if (
     (firstOnDropdownWidth &&
       allNavLinksWidth + dropdownWidth < navContainerWidth - pixelGap) ||
-    (dropdownItemsCount === 1 &&
+    (dropdownItems.length === 1 &&
       allNavLinksWidth < navContainerWidth - pixelGap)
   ) {
     // put more latest item back
