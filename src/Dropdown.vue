@@ -135,6 +135,11 @@ export default {
     outline: none;
     padding: #{$rule--nav-link-pad};
 
+    svg {
+      // Avoid the caret to prevent click event
+      pointer-events: none;
+    }
+
     &.active {
       border-color: $color--header-link-border;
       color: $text-0 !important;
