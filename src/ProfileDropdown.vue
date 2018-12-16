@@ -144,12 +144,14 @@ export default {
 }
 
 .ProfileDropdown {
-  margin-left: 2em;
+  margin-left: 48px;
   margin-right: 1em;
 
   &__head {
     border: none;
     background-color: transparent;
+    outline: none;
+    padding: 0;
 
     &:hover {
       cursor: pointer;

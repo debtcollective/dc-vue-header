@@ -1,6 +1,6 @@
 <template>
   <div :class="`${hasUnread ? 'unread' : ''}`">
-    <img width="40px" height="40px" :src="avatar" :title="username" />
+    <img width="32px" height="32px" :src="avatar" :title="username" />
   </div>
 </template>
 
@@ -35,12 +35,17 @@ export default {
 <style scoped lang="scss">
 @import "./variables";
 
-.unread::before {
-  content: "";
-  position: absolute;
-  border: 7px solid $dc-red;
-  border-radius: 100%;
-  right: 3.25rem;
+.unread {
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    border: 8px solid $red-orange;
+    border-radius: 100%;
+    left: -5px;
+    top: -5px;
+  }
 }
 
 img {
