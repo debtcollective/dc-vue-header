@@ -224,19 +224,19 @@ export default {
     color: $text-0;
     font-weight: 600;
     height: 100%;
+    position: relative;
 
     &.active {
-      position: relative;
-
-      .nav-item-wrapper {
-        height: 36px;
-      }
 
       .active-underline {
-        border: 2px solid $dc-red;
-        border-radius: 5px;
         background-color: $dc-red;
+        border-radius: 5px;
+        border: 2px solid $dc-red;
+        bottom: 18px;
+        left: 0;
         margin: 0 5%;
+        position: absolute;
+        right: 0;
       }
     }
   }
