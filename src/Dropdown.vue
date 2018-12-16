@@ -103,6 +103,11 @@ export default {
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
   }
+
+  .Dropdown__body .dropdown-item-extra .nav-item-wrapper {
+    height: auto;
+    padding: 0;
+  }
 </style>
 
 
