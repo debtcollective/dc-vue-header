@@ -54,6 +54,58 @@ export default {
 };
 </script>
 
+<style>
+  .Dropdown__body {
+    z-index: 1;
+    position: absolute;
+    width: 20em;
+    white-space: nowrap;
+    padding: 0;
+    right: 0;
+    top: 44px;
+    list-style: none;
+    background-color: #fcfbf7;
+    border-radius: 8px;
+    border: 1px solid #bdbdbd;
+  }
+
+  .Dropdown__body[aria-hidden="true"] {
+    display: none;
+  }
+
+  .Dropdown__body a {
+    display: inline-block;
+    padding: 1rem 1rem;
+    width: 100%;
+
+    /* Ensures the background color on hover does
+      not extend outside the radius of the parent li */
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+    border-bottom-left-radius: inherit;
+    border-bottom-right-radius: inherit;
+  }
+
+  .Dropdown__body a:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  .Dropdown__body li:not(:first-child) {
+    border-top: 1px solid #e0e0e0;
+  }
+
+  .Dropdown__body li:first-child {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+  }
+
+  .Dropdown__body li:last-child {
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
+</style>
+
+
 <style scoped lang="scss">
 @import "./variables";
 @import "./shared";
@@ -81,57 +133,6 @@ export default {
     &:hover {
       cursor: pointer;
       padding: 6px 17px;
-    }
-  }
-
-  &__body {
-    z-index: 1;
-    position: absolute;
-    width: 20em;
-    white-space: nowrap;
-    padding: 0;
-    right: 0;
-    top: 44px;
-    list-style: none;
-    background-color: $k-bg-tan;
-    border-radius: 8px;
-    border: 1px solid $text-3;
-
-    &[aria-hidden="true"] {
-      display: none;
-    }
-
-    a {
-      display: inline-block;
-      padding: 1rem 1rem;
-      width: 100%;
-
-      /* Ensures the background color on hover does
-       not extend outside the radius of the parent li */
-      border-top-left-radius: inherit;
-      border-top-right-radius: inherit;
-      border-bottom-left-radius: inherit;
-      border-bottom-right-radius: inherit;
-
-      &:hover {
-        background-color: rgba(0, 0, 0, 0.1);
-      }
-    }
-
-    li {
-      &:not(:first-child) {
-        border-top: 1px solid $text-4;
-      }
-
-      &:first-child {
-        border-top-left-radius: 8px;
-        border-top-right-radius: 8px;
-      }
-
-      &:last-child {
-        border-bottom-left-radius: 8px;
-        border-bottom-right-radius: 8px;
-      }
     }
   }
 }
