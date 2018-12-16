@@ -1,6 +1,6 @@
 <template>
   <div class="Header">
-    <div class="Header__height Header__width sm-hide xs-hide">
+    <div class="Header__height Header__width sm-invisible xs-invisible">
       <h1 class="Header__logo" style="float: left">
         <a :href="logoLink">
           <img class="Header__logo-img" :src="logoUrl" />

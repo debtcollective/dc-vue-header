@@ -38,7 +38,7 @@ export const priorityPattern = container => {
   let emptySpace = navContainerWidth - navLinksWidth;
 
   const latestItem = links.slice(-1)[0];
-  const latestItemWidth = latestItem.clientWidth;
+  const latestItemWidth = latestItem ? latestItem.clientWidth : -1;
 
   if (dropdownItems.length > 0) {
     toggleDropdownVisibility(dropdown, dropdownItems);
@@ -56,7 +56,7 @@ export const priorityPattern = container => {
   // Avoid to wait to the latest pixel and safely ensure the layout won't break
   const pixelGap = 5;
 
-  if (emptySpace <= pixelGap) {
+  if (latestItem && emptySpace <= pixelGap) {
     // move the latest item to the dropdown
     dropdown
       .querySelector("ul")
