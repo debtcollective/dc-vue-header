@@ -218,6 +218,11 @@ export default {
     display: block;
     height: 54px;
     margin: 9px 9px;
+
+    @media (max-width: 52em) {
+      margin: 0;
+      height: 48px;
+    }
   }
 
   &__link {
@@ -261,14 +266,12 @@ export default {
 
     .Header {
       &__logo {
-        @media (max-width: 40em) {
-          padding-left: 5%;
+        > a {
+          display: block;
         }
 
-        &:not(.-logged-in) {
-          @media (min-width: 40em) and (max-width: 52em) {
-            padding-left: 10%;
-          }
+        @media (max-width: 52em) {
+          padding: 0;
         }
       }
     }

@@ -130,15 +130,21 @@ export default {
 @import "./shared";
 
 .Header__mobile {
-  .ProfileDropdown__body {
-    right: 0;
-    width: 100%;
-    border-left: none;
-    border-right: none;
-    border-radius: 0;
+  .ProfileDropdown {
+    &__body {
+      border-left: none;
+      border-radius: 0;
+      border-right: none;
+      right: 0;
+      width: 100%;
 
-    &::before {
-      right: 34px;
+      &::before {
+        right: 34px;
+      }
+    }
+
+    @media (max-width: 52em) {
+      margin: 0 1rem 0 0;
     }
   }
 }

@@ -2,7 +2,7 @@
   <div class="HamburgerDropdown">
     <button class="navbar-toggler" type="button" aria-label="Toggle navigation" @click="toggleActive">
       <span v-if="!active" class="navbar-toggler-icon" />
-      <svg v-else width="4rem" height="2rem" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+      <svg v-else width="34px" height="26px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <g id="Canvas" fill="none">
           <g id="Vector">
             <path d="M 24 2.41714L 21.5829 0L 12 9.58286L 2.41714 0L 0 2.41714L 9.58286 12L 0 21.5829L 2.41714 24L 12 14.4171L 21.5829 24L 24 21.5829L 14.4171 12L 24 2.41714Z" fill="#2B2B2B"/>
@@ -56,14 +56,9 @@ export default {
     background-color: transparent;
     border: 1px solid transparent;
     border-radius: 0.25rem;
-
-    &:hover,
-    &:focus,
-    &:active {
-      text-decoration: none;
-      border: none;
-      outline: none;
-    }
+    text-decoration: none;
+    border: none;
+    outline: none;
 
     &:not(:disabled):not(.disabled) {
       cursor: pointer;
@@ -71,12 +66,12 @@ export default {
 
     &-icon {
       display: inline-block;
-      width: 4rem;
-      height: 3.25rem;
+      width: 34px;
+      height: 26px;
       vertical-align: middle;
       content: "";
       background: no-repeat center center;
-      background-size: 100% 100%;
+      background-size: cover;
       background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%232b2b2b' stroke-width='4' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
     }
   }
