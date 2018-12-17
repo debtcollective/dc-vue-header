@@ -1,8 +1,13 @@
 // Colors
 $hint-of-red:                               #FCFBF7;
 $french-grey:                               #BDBDBD;
+$grey:                                      #828282;
 $jaguar:                                    #2B2B2B;
 $red-orange:                                #FF4630;
+
+// Text
+$text-base:                                 $jaguar;
+$text-disabled:                             $grey;
 
 // Components
 $color--header-bg:                          $hint-of-red;

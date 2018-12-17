@@ -147,6 +147,11 @@ export default {
       margin: 0 1rem 0 0;
     }
   }
+
+  .ProfileDropdown__body-content {
+    border-left: 1px solid $color--header-border;
+    border-right: 1px solid $color--header-border;
+  }
 }
 
 .ProfileDropdown {
@@ -206,6 +211,7 @@ export default {
 
     &-content {
       max-height: 17.5rem;
+      overflow-x: hidden;
       overflow-y: scroll;
     }
 
@@ -233,7 +239,7 @@ export default {
     }
   }
 
-  &__notification {
+  &__notification:not(:first-child) {
     border-top: 1px solid $text-3;
   }
 }

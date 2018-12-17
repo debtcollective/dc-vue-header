@@ -150,6 +150,10 @@ export default {
 .ProfileNotification {
   padding: 1rem;
 
+  > a {
+    display: flex;
+  }
+
   &__icon {
     display: inline-block;
     vertical-align: top;
@@ -158,6 +162,8 @@ export default {
     width: 3rem;
     height: 3rem;
     margin-right: 0.75rem;
+    // Avoid issue that collapses the component when empty
+    min-width: 3rem;
 
     &-calendar {
       padding: 0.6rem 0.75rem;
@@ -169,11 +175,14 @@ export default {
       font-weight: 600;
       padding: 0.6rem 0;
       text-align: center;
+      height: 3rem;
+      width: 3rem;
     }
   }
 
   &__description {
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
     color: $text-1;
     padding-top: 0.25rem;
 
@@ -182,15 +191,26 @@ export default {
     }
 
     &-content {
-      font-weight: 300;
       font-style: italic;
+      font-weight: 300;
       max-width: 21rem;
-      text-overflow: ellipsis;
+    }
+
+    &-summary,
+    &-content {
       overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      // Allow to have extra gap for ellipsis otherwise ellipsis won't be visible
+      width: 90%;
+    }
+
+    &.-unread {
+      color: $text-base;
     }
 
     &.-read {
-      color: $text-2;
+      color: $text-disabled;
     }
   }
 }
