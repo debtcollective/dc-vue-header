@@ -86,6 +86,9 @@ export const priorityPattern = container => {
     container
       .querySelector(".dropdown-container ul")
       .removeChild(firstOnDropdown);
+
+    // In case we need to move more than one item for certain pixel width
+    priorityPattern(container);
   }
 
   toggleDropdownVisibility(dropdown);
