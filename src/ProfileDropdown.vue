@@ -132,20 +132,29 @@ export default {
 .Header__mobile {
   .ProfileDropdown {
     &__body {
-      border-left: none;
       border-radius: 0;
+      border-bottom-left-radius: 4px;
+      border-bottom-right-radius: 4px;
+      border-left: none;
       border-right: none;
       right: 0;
       width: 100%;
 
       &::before {
-        right: 34px;
+        right: 25px;
       }
     }
 
     @media (max-width: 52em) {
       margin: 0 1rem 0 0;
     }
+  }
+
+  .ProfileDropdown__body-footer {
+    border-left: 1px solid $color--notification-footer-border;
+    border-bottom-left-radius: 4px;
+    border-right: 1px solid $color--notification-footer-border;
+    border-bottom-right-radius: 4px;
   }
 
   .ProfileDropdown__body-content {
@@ -216,8 +225,9 @@ export default {
     }
 
     &-footer {
-      padding: 0.5rem 0.25rem;
+      padding: 0.5rem 0.5rem;
       border-top: 1px solid $text-0;
+      display: flex;
 
       .profile,
       .profile:hover {
@@ -227,14 +237,16 @@ export default {
         margin-right: 0;
       }
 
-      .log-out {
-        width: 36.5%;
-      }
-
       .profile,
       .log-out {
+        margin: 0;
         padding-bottom: 9px;
         padding-top: 9px;
+      }
+
+      .log-out {
+        flex: 1;
+        margin-left: 0.5rem;
       }
     }
   }
