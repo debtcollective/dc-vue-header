@@ -8,7 +8,7 @@
         </a>
       </h1>
 
-      <div style="display: flex; justify-content: flex-end;">
+      <div style="display: flex; justify-content: flex-end; height: 100%;">
         <nav class="Header__nav">
           <ul class="list-reset">
             <li v-for="link in filteredHeaderLinks" class="inline-block align-top nav-link nav-item" :key="link.href">
