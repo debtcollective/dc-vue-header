@@ -181,6 +181,7 @@ export default {
   }
 
   &__description {
+    flex: 1;
     display: flex;
     flex-direction: column;
     color: $text-1;
