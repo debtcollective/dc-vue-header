@@ -16,7 +16,7 @@
       </div>
       <div :class="`ProfileNotification__description ${read ? '-read' : ''}`">
         <div class="ProfileNotification__description-summary">
-          {{summary.title}}
+          <b>{{summary.title}}</b>
         </div>
         <div class="ProfileNotification__description-content">
           {{summary.content}}
@@ -182,6 +182,7 @@ export default {
     }
 
     &-content {
+      font-weight: 300;
       font-style: italic;
       max-width: 21rem;
       text-overflow: ellipsis;

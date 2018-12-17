@@ -164,7 +164,7 @@ export default {
     width: 29rem;
     white-space: nowrap;
     padding: 0;
-    right: 1.5rem;
+    right: 12px;
     top: 71px;
     list-style: none;
     border-bottom-left-radius: 8px;
@@ -217,6 +217,12 @@ export default {
 
       .log-out {
         width: 36.5%;
+      }
+
+      .profile,
+      .log-out {
+        padding-bottom: 9px;
+        padding-top: 9px;
       }
     }
   }
