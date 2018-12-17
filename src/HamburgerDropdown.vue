@@ -15,6 +15,15 @@
       <li v-for="link in links" :key="link.href" @click="toggleActive">
         <a :href="link.href" class="Dropdown__item" role="button" :onclick="link.onclick" :title="link.title">
           {{link.text}}
+          <span style="display: inline-block; width: 12px; height: 16px;">
+            <svg width="16" height="12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="transform: rotate(-90deg);">
+              <g id="Canvas" fill="none">
+                <g id="Vector 2.5">
+                  <path d="M 0 6.35294L 6 0L 12 6.35294" stroke-width="3" transform="translate(2 8.35303) scale(1 -1)" stroke="#BDBDBD"/>
+                </g>
+              </g>
+            </svg>
+          </span>
         </a>
       </li>
     </ul>
@@ -92,12 +101,14 @@ export default {
     }
 
     a {
-      display: inline-block;
-      padding: 1rem;
-      width: 100%;
+      align-items: center;
       color: $text-0;
+      display: flex;
       font-weight: 600;
+      justify-content: space-between;
+      padding: 1rem;
       text-decoration: none;
+      width: 100%;
 
       &:hover {
         text-decoration: none;
