@@ -1,12 +1,19 @@
+#session-item {
+  display: flex;
+  align-items: center;
+}
+
 .nav-item-wrapper {
-  padding: 11px 18px;
   border-radius: 4px;
+  border: 1px solid transparent;
   box-sizing: border-box;
-  height: 40px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1;
+  padding: #{$rule--nav-link-pad};
 
   &:hover {
-    padding: 10px 17px;
-    border: 1px solid $text-3;
+    border-color: $color--header-link-border;
     color: $text-0 !important;
   }
 }

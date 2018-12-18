@@ -1,6 +1,6 @@
 <template>
-  <div :class="`${hasUnread ? 'unread' : ''}`">
-    <img width="40px" height="40px" :src="avatar" :title="username" />
+  <div :class="`ProfilePicture__img-container ${hasUnread ? 'unread' : ''}`">
+    <img :src="avatar" :title="username" />
   </div>
 </template>
 
@@ -35,12 +35,29 @@ export default {
 <style scoped lang="scss">
 @import "./variables";
 
-.unread::before {
-  content: "";
-  position: absolute;
-  border: 7px solid $dc-red;
-  border-radius: 100%;
-  right: 3.25rem;
+.ProfilePicture__img-container {
+  img {
+    width: 32px;
+    height: 32px;
+
+    @media (max-width: 52em) {
+      width: 34px;
+      height: 34px;
+    }
+  }
+}
+
+.unread {
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    border: 8px solid $red-orange;
+    border-radius: 100%;
+    left: -5px;
+    top: -5px;
+  }
 }
 
 img {
