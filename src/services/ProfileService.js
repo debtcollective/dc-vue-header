@@ -12,22 +12,13 @@ export const getProfileLink = () =>
 export const getInboxLink = () => `${getProfileLink()}/messages`;
 
 export const getCurrentUser = () =>
-  fetch(
-    `${discourseEndpoint()}/about/live_post_counts.json`,
-    getOptions()
-  ).then(res => {
-    if (res.status === 403 || res.error_type === "not_logged_in") {
-      // probably just no one was logged in, besides, it will show a console error https://goo.gl/FgfJcr
-      return { user: null };
-    } else {
-      const username = res.headers.get("X-Discourse-Username");
-      return fetch(`${discourseEndpoint()}/u/${username}`, getOptions())
-        .then(r => r.json())
-        .then(user => {
-          return (window["@@current-user"] = user);
-        });
-    }
-  });
+  fetch(`${discourseEndpoint()}/session/current.json`, getOptions())
+    .then(res => res.json())
+    .then(json => {
+      const currentUser = json.current_user || null;
+
+      return (window["@@current-user"] = { user: currentUser });
+    });
 
 export const getCsrfToken = () =>
   fetch(`${discourseEndpoint()}/session/csrf.json`, getOptions())
