@@ -10,22 +10,20 @@
 
       <div style="display: flex; justify-content: flex-end; height: 100%;">
         <nav class="Header__nav">
-          <ul class="list-reset">
+          <ul class="Header__link-list list-reset">
             <li v-for="link in filteredHeaderLinks" class="inline-block align-top nav-link nav-item" :key="link.href">
-              <div class="">
-                <a
-                  :class="`Header__link align-middle ${currentPath === link.href ? 'active' : ''}`"
-                  :href="link.href"
-                  :title="link.title"
-                  :onclick="link.onclick"
-                  :rel="link.href[0] !== '/' ? 'noopener noreferrer' : ''"
-                  >
-                  <span class="nav-item-wrapper">
-                    {{link.text}}
-                  </span>
-                  <div class="active-underline" />
-                </a>
-              </div>  
+              <a
+                :class="`Header__link align-middle ${currentPath === link.href ? 'active' : ''}`"
+                :href="link.href"
+                :title="link.title"
+                :onclick="link.onclick"
+                :rel="link.href[0] !== '/' ? 'noopener noreferrer' : ''"
+                >
+                <span class="nav-item-wrapper">
+                  {{link.text}}
+                </span>
+                <div class="active-underline" />
+              </a>
             </li>
             <li id="more-item" class="inline-block align-top nav-item" style="display: none;">
               <debt-collective-header-dropdown
@@ -214,6 +212,10 @@ export default {
     }
   }
 
+  &__link-list {
+    display: flex;
+  }
+
   &__height {
     height: 72px;
   }
@@ -268,6 +270,8 @@ export default {
 
     .Header {
       &__logo {
+        margin: 0;
+
         > a {
           display: block;
         }
