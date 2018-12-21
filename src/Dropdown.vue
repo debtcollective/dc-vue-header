@@ -149,7 +149,7 @@ export default {
   &__head {
     background: none;
     border-radius: 4px;
-    border: 1px solid transparent;
+    border: 0;
     box-sizing: border-box;
     color: inherit;
     font-family: inherit;
@@ -157,6 +157,7 @@ export default {
     font-weight: 600;
     outline: none;
     padding: #{$rule--nav-link-pad};
+    height: 100%;
 
     svg {
       // Avoid the caret to prevent click event

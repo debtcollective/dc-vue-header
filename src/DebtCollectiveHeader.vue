@@ -11,7 +11,7 @@
       <div style="display: flex; justify-content: flex-end; height: 100%;">
         <nav class="Header__nav">
           <ul class="Header__link-list list-reset">
-            <li v-for="link in filteredHeaderLinks" class="inline-block align-top nav-link nav-item" :key="link.href">
+            <li v-for="link in filteredHeaderLinks" class="inline-block nav-link nav-item" :key="link.href">
               <a
                 :class="`Header__link align-middle ${currentPath === link.href ? 'active' : ''}`"
                 :href="link.href"
@@ -25,17 +25,17 @@
                 <div class="active-underline" />
               </a>
             </li>
-            <li id="more-item" class="inline-block align-top nav-item" style="display: none;">
+            <li id="more-item" class="inline-block nav-item" style="display: none;">
               <debt-collective-header-dropdown
                 :links="filteredDropdownLinks"
               />
             </li>
           </ul>
         </nav>
-        <div id="session-item" class="inline-block align-top nav-item" v-if="user !== null">
+        <div id="session-item" class="inline-block nav-item" v-if="user !== null">
           <profile-dropdown />
         </div>
-        <div id="session-item" class="inline-block align-top nav-item" v-else>
+        <div id="session-item" class="inline-block nav-item" v-else>
           <a class="Header__link align-middle" :href="loginEndpoint || `${discourseEndpoint}/login`" rel="noopener noreferrer">
             <p class="nav-item-wrapper md-hide">Login or Sign up</p>
             <p class="nav-item-wrapper lg-hide">Login</p>

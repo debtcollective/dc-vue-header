@@ -168,7 +168,7 @@ export default {
   margin-right: 1em;
 
   &__head {
-    border: none;
+    border: 0;
     background-color: transparent;
     outline: none;
     padding: 0;
