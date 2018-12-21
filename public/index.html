@@ -1,52 +1,60 @@
 <html style="background: url(./img/noisy_bg.png);">
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
-  <script src="./index.js"></script>
-  <link rel="stylesheet" type="text/css" href="./bundle.css">
-  <style>
-    @import url('https://fonts.googleapis.com/css?family=Libre+Franklin:400,400i,600,800');
-    * {
-      margin: 0;
-    }
-    html {
-      font-size: 16px;
-    }
-  </style>
-</head>
-<body style="background: linear-gradient(180deg, #DBF8FF 0%, rgba(245, 245, 245, 0) 100%);">
-  <div id="debt-collective-header">
-    <debt-collective-header
-      :header-links="headerLinks"
-      :dropdown-links="dropdownLinks"
-      discourse-endpoint="http://localhost:3000"
-      tools-endpoint="http://localhost:8080"
-    ></debt-collective-header>
-  </div>
-
-  <script>
-    window.loggit = () => console.log('hello, world!');
-
-    Vue.component(DebtCollectiveHeader.name, DebtCollectiveHeader)
-
-    new Vue({
-      el: '#debt-collective-header',
-      data: {
-        headerLinks: [
-          { text: 'My Disputes', href: '#disputes' },
-          { text: 'Dispute Your Debt', href: '#debt' },
-          { text: 'Campaings', href: '#camp' },
-          { text: 'Events', href: '#events' },
-          { text: 'News', href: '#news' },
-          { text: 'Dispute Your Debt', href: '#dispute-your-debt', onclick: 'window.loggit()' },
-          { text: 'Admin Link Only', href: '#dispute-your-asdf', onclick: 'window.loggit()', roles: ['dispute-admin'] },
-          { text: 'About the Debt Collective', href: '#about' },
-        ],
-        dropdownLinks: [
-        ]
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script src="./index.js"></script>
+    <link rel="stylesheet" type="text/css" href="./bundle.css" />
+    <style>
+      @import url("https://fonts.googleapis.com/css?family=Libre+Franklin:400,400i,600,800");
+      * {
+        margin: 0;
       }
-    })
+      html {
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body
+    style="background: linear-gradient(180deg, #DBF8FF 0%, rgba(245, 245, 245, 0) 100%);"
+  >
+    <div id="debt-collective-header">
+      <debt-collective-header
+        :header-links="headerLinks"
+        :dropdown-links="dropdownLinks"
+        discourse-endpoint="http://localhost:3000"
+        tools-endpoint="http://localhost:8080"
+      ></debt-collective-header>
+    </div>
 
-  </script>
-</body>
+    <script>
+      window.loggit = () => console.log("hello, world!");
+
+      Vue.component(DebtCollectiveHeader.name, DebtCollectiveHeader);
+
+      new Vue({
+        el: "#debt-collective-header",
+        data: {
+          headerLinks: [
+            { text: "Home", href: "/" },
+            { text: "Dispute Your Debt", href: "#debt" },
+            { text: "Campaings", href: "#camp" },
+            { text: "Events", href: "#events" },
+            { text: "News", href: "#news" },
+            {
+              text: "Dispute Your Debt",
+              href: "#dispute-your-debt",
+              onclick: "window.loggit()"
+            },
+            {
+              text: "Admin Link Only",
+              href: "#dispute-your-asdf",
+              onclick: "window.loggit()",
+              roles: ["dispute-admin"]
+            }
+          ],
+          dropdownLinks: []
+        }
+      });
+    </script>
+  </body>
 </html>

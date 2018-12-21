@@ -1,28 +1,28 @@
 <template>
   <div class="ProfileDropdown" ref="container">
     <button class="ProfileDropdown__head" role="button" @click="toggleActive">
-      <profile-picture :has-unread="hasUnread" />
+      <profile-picture :has-unread="hasUnread"/>
       <span class="sr-only">Open/Close Profile Notifications</span>
     </button>
     <div class="ProfileDropdown__body" :aria-hidden="(!active).toString()">
-      <div class="ProfileDropdown__body-header">
-        Notifications
-      </div>
+      <div class="ProfileDropdown__body-header">Notifications</div>
       <ul class="ProfileDropdown__body-content list-reset" v-if="notifications.length">
-        <li class="ProfileDropdown__notification" v-for="notification in notifications" :key="notification.id">
-          <profile-notification :notification="notification" />
+        <li
+          class="ProfileDropdown__notification"
+          v-for="notification in notifications"
+          :key="notification.id"
+        >
+          <profile-notification :notification="notification"/>
         </li>
       </ul>
-      <div v-else class="ProfileDropdown__body-content">
-        No notifications!
-      </div>
+      <div v-else class="ProfileDropdown__body-content">No notifications!</div>
       <div class="ProfileDropdown__body-footer">
-        <a class="btn btn-primary profile" :href="profileHref" rel="noopener noreferrer">
-          View Profile
-        </a>
-        <button type="button" class="btn btn-secondary log-out" @click="handleLogout">
-          Log out
-        </button>
+        <a
+          class="btn btn-primary profile"
+          :href="profileHref"
+          rel="noopener noreferrer"
+        >View Profile</a>
+        <button type="button" class="btn btn-secondary log-out" @click="handleLogout">Log out</button>
       </div>
     </div>
   </div>
@@ -164,7 +164,7 @@ export default {
 }
 
 .ProfileDropdown {
-  margin-left: 48px;
+  margin-left: 1em;
   margin-right: 1em;
 
   &__head {

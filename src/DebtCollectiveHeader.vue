@@ -176,7 +176,7 @@ export default {
   left: 0;
   right: 0;
   height: 72px;
-  color: $text-0;
+  color: $text-1;
   border-bottom: 1px solid $color--header-border;
   background-color: $color--header-bg;
   font-family: "Libre Franklin", "Helvetica Neue", Arial, sans-serif,
@@ -226,13 +226,11 @@ export default {
   }
 
   &__link {
-    color: $text-0;
     font-weight: 600;
     height: 100%;
     position: relative;
 
     &.active {
-
       .active-underline {
         background-color: $dc-red;
         border-radius: 5px;
@@ -254,7 +252,6 @@ export default {
     font: inherit;
     font-weight: 500;
     text-align: left;
-    color: $text-0;
     cursor: pointer;
     transition: color 260ms;
   }
