@@ -1,32 +1,32 @@
 <template>
   <div class="dropdown-container">
-    <div class="align-middle Dropdown">
-      <button
-        :class="`Dropdown__head nav-item-wrapper ${active ? 'active' : ''}`"
-        type="button"
-        @click="toggleActive"
+    <button
+      :class="`Dropdown__head nav-item-wrapper ${active ? 'active' : ''}`"
+      type="button"
+      @click="toggleActive"
+    >
+      More
+      <svg
+        width="16"
+        height="11"
+        viewBox="0 0 16 11"
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
       >
-        More
-        <svg
-          width="16"
-          height="11"
-          viewBox="0 0 16 11"
-          version="1.1"
-          xmlns="http://www.w3.org/2000/svg"
-          xmlns:xlink="http://www.w3.org/1999/xlink"
-        >
-          <g id="Canvas" fill="none">
-            <g id="Vector 2.5">
-              <path
-                d="M 0 6.35294L 6 0L 12 6.35294"
-                stroke-width="3"
-                transform="translate(2 8.35303) scale(1 -1)"
-                stroke="#2B2B2B"
-              ></path>
-            </g>
+        <g id="Canvas" fill="none">
+          <g id="Vector 2.5">
+            <path
+              d="M 0 6.35294L 6 0L 12 6.35294"
+              stroke-width="3"
+              transform="translate(2 8.35303) scale(1 -1)"
+              stroke="#2B2B2B"
+            ></path>
           </g>
-        </svg>
-      </button>
+        </g>
+      </svg>
+    </button>
+    <div class="Dropdown">
       <ul class="Dropdown__body" aria-label="submenu" :aria-hidden="(!active).toString()">
         <li v-for="link in links" :key="link.href">
           <a
@@ -84,7 +84,7 @@ export default {
   white-space: nowrap;
   padding: 0;
   right: 0;
-  top: 44px;
+  top: 30px;
   list-style: none;
   background-color: #fcfbf7;
   border-radius: 8px;
@@ -167,6 +167,7 @@ export default {
     &:hover {
       color: $text-2;
       cursor: pointer;
+      outline: none;
 
       svg path {
         stroke: $text-2;

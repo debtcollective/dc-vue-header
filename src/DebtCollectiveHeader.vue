@@ -214,6 +214,7 @@ export default {
 
   &__link-list {
     display: flex;
+    height: 100%;
   }
 
   &__height {
