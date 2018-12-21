@@ -20,9 +20,9 @@
                   :onclick="link.onclick"
                   :rel="link.href[0] !== '/' ? 'noopener noreferrer' : ''"
                   >
-                  <p class="nav-item-wrapper">
+                  <span class="nav-item-wrapper">
                     {{link.text}}
-                  </p>
+                  </span>
                   <div class="active-underline" />
                 </a>
               </div>  
@@ -30,7 +30,6 @@
             <li id="more-item" class="inline-block align-top nav-item" style="display: none;">
               <debt-collective-header-dropdown
                 :links="filteredDropdownLinks"
-                style="margin-right: 1em"
               />
             </li>
           </ul>
@@ -149,6 +148,11 @@ export default {
         })
         .catch(err => {
           console.error(err);
+        })
+        .finally(() => {
+          // Trigger resize on widow to accommodate items 
+          // withing the header size with the user avatar
+          window.dispatchEvent(new Event("resize"));
         });
     },
     bindPriorityPattern() {
@@ -176,7 +180,7 @@ export default {
   left: 0;
   right: 0;
   height: 72px;
-  color: $text-0;
+  color: $text-1;
   border-bottom: 1px solid $color--header-border;
   background-color: $color--header-bg;
   font-family: "Libre Franklin", "Helvetica Neue", Arial, sans-serif,
@@ -232,14 +236,13 @@ export default {
     position: relative;
 
     &.active {
-
       .active-underline {
         background-color: $dc-red;
         border-radius: 5px;
         border: 2px solid $dc-red;
         bottom: 18px;
         left: 0;
-        margin: 0 5%;
+        margin: 0 10px;
         position: absolute;
         right: 0;
       }
@@ -254,7 +257,6 @@ export default {
     font: inherit;
     font-weight: 500;
     text-align: left;
-    color: $text-0;
     cursor: pointer;
     transition: color 260ms;
   }

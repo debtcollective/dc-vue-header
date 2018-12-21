@@ -19,9 +19,6 @@ const filterLinks = links => user => {
   // links that don't have roles associated
   if (user === null) return links.filter(({ roles = [] }) => !roles.length);
 
-  // If the user is an admin, then they can see everything so return all the links
-  if (user.admin) return links;
-
   const groups = user.groups.map(g => g.name);
 
   return links.filter(({ roles = [] }) => {
@@ -29,7 +26,7 @@ const filterLinks = links => user => {
     if (!roles.length) return true;
 
     // Otherwise only include it if the user has at least one of the right roles/groups
-    return roles.filter(role => groups.indexOf(role) !== -1).length;
+    return roles.filter(role => groups.indexOf(role) > -1).length;
   });
 };
 

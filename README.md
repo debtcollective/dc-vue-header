@@ -81,10 +81,10 @@ Once you have the configuration file, update the example values in order to acti
 The best way to iterate is:
 
 ```
+# start the server
+yarn start
 # builds the component and puts it in the public folder with a demo page
 yarn build
-# ran in repo root will serve the demo page (https://github.com/indexzero/http-server)
-node_modules/.bin/http-server
 ```
 
 You need to rebuild each time and make sure to clear your cache. At this point the expected behavior is that running the Discourse instance and then this application whenever you log in into Discourse the header will get updated.

@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "rollup -c && cp index.js public/index.js && cp bundle.css public/bundle.css",
+    "start": "yarn http-server",
+    "build":
+      "rollup -c && cp index.js public/index.js && cp bundle.css public/bundle.css",
     "lint": "vue-cli-service lint",
     "precommit": "lint-staged"
   },
@@ -28,35 +30,20 @@
     "vue-template-compiler": "^2.5.13"
   },
   "babel": {
-    "presets": [
-      "@vue/app"
-    ]
+    "presets": ["@vue/app"]
   },
   "eslintConfig": {
     "root": true,
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ]
+    "extends": ["plugin:vue/essential", "eslint:recommended"]
   },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not ie <= 10"
-  ],
+  "browserslist": ["> 1%", "last 2 versions", "not ie <= 10"],
   "dependencies": {
     "postcss-css-variables": "^0.8.1",
     "postcss-nested": "^3.0.0",
     "promis": "^1.1.4"
   },
   "lint-staged": {
-    "*.js?(.es6)": [
-      "prettier --write",
-      "git add"
-    ],
-    "*.vue": [
-      "vue-cli-service lint",
-      "git add"
-    ]
+    "*.js?(.es6)": ["prettier --write", "git add"],
+    "*.vue": ["vue-cli-service lint", "git add"]
   }
 }
