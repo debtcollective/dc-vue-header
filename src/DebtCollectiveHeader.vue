@@ -20,9 +20,9 @@
                   :onclick="link.onclick"
                   :rel="link.href[0] !== '/' ? 'noopener noreferrer' : ''"
                   >
-                  <p class="nav-item-wrapper">
+                  <span class="nav-item-wrapper">
                     {{link.text}}
-                  </p>
+                  </span>
                   <div class="active-underline" />
                 </a>
               </div>  
@@ -30,7 +30,6 @@
             <li id="more-item" class="inline-block align-top nav-item" style="display: none;">
               <debt-collective-header-dropdown
                 :links="filteredDropdownLinks"
-                style="margin-right: 1em"
               />
             </li>
           </ul>
@@ -226,6 +225,7 @@ export default {
   }
 
   &__link {
+    color: $text-0;
     font-weight: 600;
     height: 100%;
     position: relative;
@@ -237,7 +237,7 @@ export default {
         border: 2px solid $dc-red;
         bottom: 18px;
         left: 0;
-        margin: 0 5%;
+        margin: 0 10px;
         position: absolute;
         right: 0;
       }

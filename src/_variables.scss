@@ -1,23 +1,23 @@
 // Colors
-$hint-of-red:                               #FCFBF7;
-$french-grey:                               #BDBDBD;
-$grey:                                      #828282;
-$jaguar:                                    #2B2B2B;
-$red-orange:                                #FF4630;
+$hint-of-red: #fcfbf7;
+$french-grey: #bdbdbd;
+$grey: #828282;
+$jaguar: #2b2b2b;
+$red-orange: #ff4630;
 
 // Text
-$text-base:                                 $jaguar;
-$text-disabled:                             $grey;
+$text-base: $jaguar;
+$text-disabled: $grey;
 
 // Components
-$color--header-bg:                          $hint-of-red;
-$color--header-border:                      $french-grey;
-$color--header-link-border:                 $french-grey;
-$color--header-link-active-border:          $red-orange;
-$color--notification-footer-border:         $jaguar;
+$color--header-bg: $hint-of-red;
+$color--header-border: $french-grey;
+$color--header-link-border: $french-grey;
+$color--header-link-active-border: $red-orange;
+$color--notification-footer-border: $jaguar;
 
 // Shared rules
-$rule--nav-link-pad:                        "11px 15px";
+$rule--nav-link-pad: "0 10px";
 
 $header-height: 72px;
 $k-font-family: "Libre Franklin", "Helvetica Neue", Arial, sans-serif,
