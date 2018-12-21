@@ -148,6 +148,11 @@ export default {
         })
         .catch(err => {
           console.error(err);
+        })
+        .finally(() => {
+          // Trigger resize on widow to accommodate items 
+          // withing the header size with the user avatar
+          window.dispatchEvent(new Event("resize"));
         });
     },
     bindPriorityPattern() {
