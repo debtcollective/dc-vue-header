@@ -82,10 +82,12 @@ export const priorityPattern = container => {
     const hiddenNavLink = container.querySelector(".hidden-nav-link");
     hiddenNavLink && hiddenNavLink.classList.remove("hidden-nav-link");
 
-    const dropdownContainerUl = container.querySelector(
-      ".dropdown-container ul"
-    );
-    dropdownContainerUl && dropdownContainerUl.removeChild(firstOnDropdown);
+    if (firstOnDropdown) {
+      const dropdownContainerUl = container.querySelector(
+        ".dropdown-container ul"
+      );
+      dropdownContainerUl && dropdownContainerUl.removeChild(firstOnDropdown);
+    }
 
     // In case we need to move more than one item for certain pixel width
     priorityPattern(container);
