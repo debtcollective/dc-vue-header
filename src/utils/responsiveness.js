@@ -79,13 +79,13 @@ export const priorityPattern = container => {
       allNavLinksWidth < navContainerWidth - pixelGap)
   ) {
     // put more latest item back
-    container
-      .querySelector(".hidden-nav-link")
-      .classList.remove("hidden-nav-link");
+    const hiddenNavLink = container.querySelector(".hidden-nav-link");
+    hiddenNavLink && hiddenNavLink.classList.remove("hidden-nav-link");
 
-    container
-      .querySelector(".dropdown-container ul")
-      .removeChild(firstOnDropdown);
+    const dropdownContainerUl = container.querySelector(
+      ".dropdown-container ul"
+    );
+    dropdownContainerUl && dropdownContainerUl.removeChild(firstOnDropdown);
 
     // In case we need to move more than one item for certain pixel width
     priorityPattern(container);
