@@ -88,7 +88,7 @@ export default {
     },
     logoLink: {
       type: String,
-      default: "/"
+      default: "https://debtcollective.org/"
     },
     headerLinks: {
       type: Array,
